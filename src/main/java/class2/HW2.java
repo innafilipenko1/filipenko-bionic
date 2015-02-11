@@ -7,11 +7,12 @@ import java.util.Arrays;
  */
 public class HW2 {
 
+    // Речь идет о бинарном поиске в уже отсортированном массиве. Есть массива - нужно найти элемент
+
     public static void main(String[] args) {
 
-        // Речь идет о бинарном поиске в уже отсортированном массиве. Есть массива - нужно найти элемент
 
-        binarySearch(new int[]{1, 8, 2, 2}, 1);
+        binarySearch(new int[]{1, 8, 2, 2}, 0);
 
     }
 
@@ -21,7 +22,7 @@ public class HW2 {
         System.out.println("The sorted array: " + Arrays.toString(array));
 
         int begin = 0;
-        int end = array.length;
+        int end = array.length-1;
         int mid = (begin + (end - begin)) / 2;
         int count = 0;
 
@@ -38,7 +39,7 @@ public class HW2 {
 
             for (int i = 0; i < mid; i++) {
                 if (array[i] == x)  {
-                    int index = i;
+                        int index = i;
                     System.out.println("The array element " + array[i] + " is under index " + index);
                 }
 
