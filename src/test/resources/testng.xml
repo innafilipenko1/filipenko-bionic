@@ -1,0 +1,12 @@
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="firstTestSuite" verbose="1" >
+    <parameter name="expectedCount" value="2"/>
+
+    <test name="SmokeTest">
+        <classes>
+            <class name="class3.Test1" />
+        </classes>
+    </test>
+</suite>
