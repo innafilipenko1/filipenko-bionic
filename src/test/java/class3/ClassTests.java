@@ -12,7 +12,7 @@ import static java.nio.file.Paths.get;
  * Created by c2611 on 11.02.2015.
  */
 
-public class Test1 {
+public class ClassTests {
 
     @Test
     public void readWordInFile() {
@@ -24,7 +24,7 @@ public class Test1 {
 
         try {
 
-            String content = new String(readAllBytes(get("C://Users/ifilipenko/Downloads/testing.txt")));
+            String content = new String(readAllBytes(get("/Users/inna/Downloads/testing.txt")));
 
             Assert.assertTrue(content.contains(string));
 
