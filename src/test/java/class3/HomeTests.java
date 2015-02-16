@@ -32,7 +32,6 @@ public class HomeTests {
     @Test
     public void checkStringForRealNumber1(){
 
-
         String string = "This line has a real number such as 0.23";
         String test = "";
 
@@ -43,8 +42,6 @@ public class HomeTests {
                 test = splitString[i];
             }
         }
-
-
         Assert.assertTrue(test.matches("\\d\\.\\d{2}"));
 
 

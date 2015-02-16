@@ -6,8 +6,7 @@
 
     <test name="SmokeTest">
         <classes>
-            <class name="class3.HomeTests" />
-            <class name="class3.ClassTests" />
+            <class name="class4.Test1" />
         </classes>
     </test>
 </suite>
