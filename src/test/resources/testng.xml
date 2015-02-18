@@ -6,7 +6,7 @@
 
     <test name="SmokeTest">
         <classes>
-            <class name="class4.Test1" />
+            <class name="class5.WikiTest" />
         </classes>
     </test>
 </suite>
