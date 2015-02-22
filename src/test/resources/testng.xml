@@ -4,9 +4,15 @@
 <suite name="firstTestSuite" verbose="1" >
     <parameter name="expectedCount" value="2"/>
 
-    <test name="SmokeTest">
+    <test name="SmokeTest" enabled="false">
         <classes>
             <class name="class5.WikiTest" />
         </classes>
     </test>
+    <test name="OLX">
+        <classes>
+            <class name="olx.tests.SimpleSearchTests" />
+        </classes>
+    </test>
+
 </suite>
