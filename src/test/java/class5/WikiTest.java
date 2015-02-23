@@ -46,7 +46,6 @@ public class WikiTest {
         String string = driver.findElement(By.className("css-truncate-target")).getText();
         Assert.assertTrue(string.equals("innafilipenko1"));
 
-
     }
 
     @AfterSuite
