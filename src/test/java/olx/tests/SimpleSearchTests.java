@@ -1,9 +1,10 @@
 package olx.tests;
 
-import olx.config.SimpleSearchePage;
+import olx.config.AbstractPage;
+import olx.config.SimpleSearchPage;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -13,36 +14,20 @@ import org.testng.annotations.Test;
  */
 
 
-public class SimpleSearchTests {
-
-    public WebDriver driver;
-    private SimpleSearchePage ss;
-
-    @BeforeSuite
-    public void init() {
-
-        driver = new FirefoxDriver();
-        ss = new SimpleSearchePage(driver);
-    }
+public class SimpleSearchTests extends AbstractTest{
 
 
     @Test
     public void checkSearchByName() {
 
+        SimpleSearchPage ss =  new SimpleSearchPage(driver);
         ss.openSite();
-        ss.startSearch("кот");
-        String currentURL = driver.getCurrentUrl();
-
-        Assert.assertTrue(currentURL.contains("кот"));
+        ss.doAndCheckSearchByInput("кот");
 
     }
 
 
-    @AfterSuite
-    public void shutEvent() {
 
-        driver.quit();
-    }
 
 
 }

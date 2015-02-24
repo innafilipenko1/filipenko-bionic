@@ -6,12 +6,12 @@
 
     <test name="SmokeTest" enabled="false">
         <classes>
-            <class name="class5.WikiTest" />
-        </classes>
+        <class name="class5.WikiTest" />
+    </classes>
     </test>
-    <test name="OLX">
+    <test name="OLX" >
         <classes>
-            <class name="olx.tests.SimpleSearchTests" />
+            <class name="olx.tests.FilteringTests"/>
         </classes>
     </test>
 

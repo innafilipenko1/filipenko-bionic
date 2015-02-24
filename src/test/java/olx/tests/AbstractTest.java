@@ -17,10 +17,9 @@ public class AbstractTest {
 
     @BeforeSuite
     public void init(){
-        File file = new File("D://Tools//chromedriver.exe");
+        //File file = new File("D://Tools//chromedriver.exe");
 
-
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
     }
 
     @AfterSuite

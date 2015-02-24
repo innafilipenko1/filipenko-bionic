@@ -1,10 +1,11 @@
 package olx.tests;
 
-import junit.framework.Assert;
+
 import olx.config.ChildDressPage;
 import olx.config.ChildPage;
 import olx.config.HomePage;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -16,12 +17,8 @@ public class FilteringTests extends AbstractTest {
 
     @Test
     public void visualFilterTest() {
-
         openChildWorld();
-        ChildPage childPage = new ChildPage(driver);
-        childPage.openChildDressPage();
-        ChildDressPage childDressPage = new ChildDressPage(driver);
-        Assert.assertTrue(childDressPage.isOpen());
+        openChildDressPage();
 
     }
 
@@ -32,6 +29,26 @@ public class FilteringTests extends AbstractTest {
         homePage.openChildWorld();
         ChildPage childPage = new ChildPage(driver);
         Assert.assertTrue(childPage.isOpen());
+    }
+
+    public void openChildDressPage(){
+        ChildPage childPage = new ChildPage(driver);
+        childPage.openChildDressPage();
+        ChildDressPage childDressPage = new ChildDressPage(driver);
+        Assert.assertTrue(childDressPage.isOpen());
+    }
+
+    @Test
+    public void filterForNewStateTest(){
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+        homePage.openChildWorld();
+        ChildPage childPage = new ChildPage(driver);
+        childPage.openChildDressPage();
+        ChildDressPage childDressPage = new ChildDressPage(driver);
+        childDressPage.selectState();
+
+
     }
 
 
