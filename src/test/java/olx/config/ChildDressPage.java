@@ -1,12 +1,12 @@
 package olx.config;
 
 
-import org.apache.xerces.dom3.as.ASElementDeclaration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -14,8 +14,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class ChildDressPage extends AbstractPage {
 
-    private static final By state = By.xpath("//span[@class='header block']");
-    private static final By checkboxNew = By.xpath("//ul[contains(@class, 'abs select binded')]/li[3]/label[@data-value='new']");
+    private By state = By.xpath("//span[@class='header block']");
+    private By checkboxNew = By.xpath("//ul[contains(@class, 'abs select binded')]/li[3]/label[@data-value='new']");
+    private By firstElementesultList = By.xpath("//ul[contains(@class, 'abs select binded')]/li[3]/label[@data-value='new']");
 
 
     public ChildDressPage(WebDriver driver) {
@@ -27,13 +28,27 @@ public class ChildDressPage extends AbstractPage {
                 && driver.findElement(By.id("main-category-choose-label")).getText().contains("Дитячий одяг"));
     }
 
-    public void selectState() {
+    public void selectNewState() {
 
         Assert.assertTrue(driver.findElement(state).isDisplayed());
         driver.findElement(state).click();
         driver.manage().timeouts().implicitlyWait(1000, TimeUnit.DAYS.MICROSECONDS);
         Assert.assertTrue(driver.findElement(checkboxNew).isDisplayed());
         driver.findElement(checkboxNew).click();
+
+    }
+
+    public void checkResultListFilteredByNewState(){
+
+        List<WebElement> offersTable = driver.findElement(SimpleSearchPage.resultTable).findElements(SimpleSearchPage.resultTabelElement);
+
+        for (int i = 0; i < 2 ; i++) {
+
+            offersTable.get(i).click();
+            Assert.assertTrue(driver.getCurrentUrl().contains("/obyavlenie/"));
+            //Assert.assertTrue(driver.findElement(By.xpath("")));
+
+        }
 
 
 

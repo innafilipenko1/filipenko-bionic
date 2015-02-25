@@ -4,7 +4,7 @@ package olx.tests;
 import olx.config.ChildDressPage;
 import olx.config.ChildPage;
 import olx.config.HomePage;
-import org.openqa.selenium.By;
+import olx.config.SimpleSearchPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -22,7 +22,7 @@ public class FilteringTests extends AbstractTest {
 
     }
 
-    public void openChildWorld(){
+    public void openChildWorld() {
         HomePage homePage = new HomePage(driver);
         driver.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
         homePage.open();
@@ -31,7 +31,7 @@ public class FilteringTests extends AbstractTest {
         Assert.assertTrue(childPage.isOpen());
     }
 
-    public void openChildDressPage(){
+    public void openChildDressPage() {
         ChildPage childPage = new ChildPage(driver);
         childPage.openChildDressPage();
         ChildDressPage childDressPage = new ChildDressPage(driver);
@@ -39,14 +39,13 @@ public class FilteringTests extends AbstractTest {
     }
 
     @Test
-    public void filterForNewStateTest(){
-        HomePage homePage = new HomePage(driver);
-        homePage.open();
-        homePage.openChildWorld();
-        ChildPage childPage = new ChildPage(driver);
-        childPage.openChildDressPage();
+    public void filterForNewStateTest() {
+        openChildWorld();
+        openChildDressPage();
         ChildDressPage childDressPage = new ChildDressPage(driver);
-        childDressPage.selectState();
+        childDressPage.selectNewState();
+
+
 
 
     }

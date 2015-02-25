@@ -3,7 +3,6 @@ package olx.config;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 
 import java.util.List;
@@ -22,8 +21,9 @@ public class SimpleSearchPage extends AbstractPage{
 
     private By searchLookup = By.id("headerSearch");
     private By searchButton = By.id("submit-searchmain");
-    private By resultTable = By.id("offers_table");
-    private By tableElement = By.xpath("//table[@id='offers_table']/tbody/tr//h3/a/span");
+    public static final By resultTable = By.id("offers_table");
+    public static final By resultTabelElement = By.className("marginright5 link linkWithHash detailsLink");
+    private By tableElementLinkText = By.xpath("//table[@id='offers_table']/tbody/tr//h3/a/span");
 
 
     public void openSite(){
@@ -42,7 +42,7 @@ public class SimpleSearchPage extends AbstractPage{
 
     public void checkResultTable(String string){
 
-        List<WebElement> offersTable = driver.findElement(resultTable).findElements(tableElement);
+        List<WebElement> offersTable = driver.findElement(resultTable).findElements(tableElementLinkText);
 
         for(WebElement trElement : offersTable){
 

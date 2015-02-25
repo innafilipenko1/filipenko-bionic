@@ -22,10 +22,10 @@ public class AbstractTest {
         driver = new FirefoxDriver();
     }
 
-    @AfterSuite
-    public void shutEvt(){
-       if(driver != null) driver.quit();
-    }
+//    @AfterSuite
+//    public void shutEvt(){
+//       if(driver != null) driver.quit();
+//    }
 
 
 }
