@@ -2,13 +2,14 @@ package olx.config;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import webdriver.Browser;
 
 /**
  * Created by c2611 on 23.02.2015.
  */
 public class HomePage extends AbstractPage {
 
-    public HomePage(WebDriver driver){
+    public HomePage(Browser driver){
         super(driver);
     }
 

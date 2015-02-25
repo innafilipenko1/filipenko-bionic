@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import webdriver.Browser;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -15,11 +16,14 @@ import java.util.concurrent.TimeUnit;
 public class ChildDressPage extends AbstractPage {
 
     private By state = By.xpath("//span[@class='header block']");
+    private By stateCSS = By.cssSelector("span:class='header block'");
     private By checkboxNew = By.xpath("//ul[contains(@class, 'abs select binded')]/li[3]/label[@data-value='new']");
+    private By getCheckboxNewCSS = By.cssSelector("#f-new_state");
     private By firstElementesultList = By.xpath("//ul[contains(@class, 'abs select binded')]/li[3]/label[@data-value='new']");
+    private By listElementCSS = By.cssSelector(".marginright5.link.linkWithHash.detailsLink>span");
 
 
-    public ChildDressPage(WebDriver driver) {
+    public ChildDressPage(Browser driver) {
         super(driver);
     }
 
@@ -38,21 +42,18 @@ public class ChildDressPage extends AbstractPage {
 
     }
 
-    public void checkResultListFilteredByNewState(){
+    public Boolean checkResultListFilteredByNewState() {
 
-        List<WebElement> offersTable = driver.findElement(SimpleSearchPage.resultTable).findElements(SimpleSearchPage.resultTabelElement);
-
-        for (int i = 0; i < 2 ; i++) {
-
-            offersTable.get(i).click();
-            Assert.assertTrue(driver.getCurrentUrl().contains("/obyavlenie/"));
-            //Assert.assertTrue(driver.findElement(By.xpath("")));
-
+        List<WebElement> elements = driver.findElements(By.cssSelector("a"));
+        Boolean ok = false;
+        for (int i = 0; i < elements.size(); i++) {
+            if (elements.get(i).getText().equalsIgnoreCase("Нові")) {
+                ok = true;}
         }
-
-
-
-
+        driver.navigate().back();
+        return ok;
     }
 
+
 }
+

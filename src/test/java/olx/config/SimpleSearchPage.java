@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import webdriver.Browser;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class SimpleSearchPage extends AbstractPage{
 
 
-    public SimpleSearchPage(WebDriver driver){
+    public SimpleSearchPage(Browser driver){
         super (driver);
     }
 
@@ -49,11 +50,6 @@ public class SimpleSearchPage extends AbstractPage{
             Assert.assertTrue(org.apache.commons.lang3.StringUtils.containsIgnoreCase(trElement.getText(), string));
 
         }
-
-
-
-
-
     }
 
 

@@ -5,6 +5,10 @@ import olx.config.ChildDressPage;
 import olx.config.ChildPage;
 import olx.config.HomePage;
 import olx.config.SimpleSearchPage;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -44,7 +48,8 @@ public class FilteringTests extends AbstractTest {
         openChildDressPage();
         ChildDressPage childDressPage = new ChildDressPage(driver);
         childDressPage.selectNewState();
-
+        childDressPage.checkResultListFilteredByNewState();
+        Assert.assertTrue(childDressPage.checkResultListFilteredByNewState());
 
 
 

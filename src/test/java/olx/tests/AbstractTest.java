@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import webdriver.Browser;
 
 import java.io.File;
 
@@ -13,19 +14,19 @@ import java.io.File;
  */
 public class AbstractTest {
 
-    protected WebDriver driver;
+    protected Browser driver;
 
     @BeforeSuite
     public void init(){
         //File file = new File("D://Tools//chromedriver.exe");
 
-        driver = new FirefoxDriver();
+        driver = new Browser(new FirefoxDriver());
     }
 
-//    @AfterSuite
-//    public void shutEvt(){
-//       if(driver != null) driver.quit();
-//    }
+    @AfterSuite
+    public void shutEvt(){
+       if(driver != null) driver.quit();
+    }
 
 
 }

@@ -12,6 +12,7 @@
     <test name="OLX" >
         <classes>
             <class name="olx.tests.FilteringTests"/>
+            <class name="olx.tests.SimpleSearchTests"/>
         </classes>
     </test>
 
