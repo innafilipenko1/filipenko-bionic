@@ -1,6 +1,5 @@
 package olx.tests;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
@@ -8,25 +7,34 @@ import org.testng.annotations.BeforeSuite;
 import webdriver.Browser;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by c2611 on 23.02.2015.
  */
 public class AbstractTest {
 
-    protected Browser driver;
+    protected Browser browser;
 
     @BeforeSuite
     public void init(){
-        //File file = new File("D://Tools//chromedriver.exe");
+        //browser = new Browser(new FirefoxDriver());
+        //https://code.google.com/p/chromedriver/issues/detail?id=679
+        //https://code.google.com/p/selenium/issues/detail?id=7954
 
-        driver = new Browser(new FirefoxDriver());
+        File file = new File("C:\\Users\\ifilipenko\\OneDrive\\tools\\webdriver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver",file.getAbsolutePath());
+        browser = new Browser(new ChromeDriver());
+        browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
     }
 
+/*
     @AfterSuite
     public void shutEvt(){
-       if(driver != null) driver.quit();
+       if(browser != null) browser.quit();
     }
+*/
 
 
 }

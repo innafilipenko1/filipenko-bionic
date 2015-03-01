@@ -45,12 +45,13 @@ public class ChildDressPage extends AbstractPage {
     public Boolean checkResultListFilteredByNewState() {
 
         List<WebElement> elements = driver.findElements(By.cssSelector("a"));
+        System.out.println(elements.toArray().toString());
         Boolean ok = false;
-        for (int i = 0; i < elements.size(); i++) {
+ /*       for (int i = 0; i < elements.size(); i++) {
             if (elements.get(i).getText().equalsIgnoreCase("Нові")) {
                 ok = true;}
         }
-        driver.navigate().back();
+        driver.navigate().back();*/
         return ok;
     }
 

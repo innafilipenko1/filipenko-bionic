@@ -1,12 +1,6 @@
 package olx.tests;
 
-import olx.config.AbstractPage;
 import olx.config.SimpleSearchPage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 /**
@@ -20,7 +14,7 @@ public class SimpleSearchTests extends AbstractTest{
     @Test
     public void checkSearchByName() {
 
-        SimpleSearchPage ss =  new SimpleSearchPage(driver);
+        SimpleSearchPage ss =  new SimpleSearchPage(browser);
         ss.openSite();
         ss.doAndCheckSearchByInput("кот");
 

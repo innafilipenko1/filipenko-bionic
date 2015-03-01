@@ -14,34 +14,32 @@ import java.util.Set;
  */
 public class Browser implements WebDriver {
 
-    WebDriver browser;
+   public WebDriver browser;
 
     public Browser(WebDriver driver){
         this.browser = driver;
     }
 
-
     @Override
     public void get(String s) {
-
         browser.get(s);
     }
 
     @Override
     public String getCurrentUrl() {
-        return getCurrentUrl();
+        return browser.getCurrentUrl();
     }
 
     @Override
     public String getTitle() {
-        return getTitle();
+        return browser.getTitle();
     }
 
     @Override
     public List<WebElement> findElements(By by) {
         WebDriverWait webDriverWait = new WebDriverWait(browser, 10);
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(by));
-        return findElements(by);
+        return browser.findElements(by);
     }
 
     @Override
@@ -53,41 +51,42 @@ public class Browser implements WebDriver {
 
     @Override
     public String getPageSource() {
-        return getPageSource();
+        return browser.getPageSource();
     }
 
     @Override
     public void close() {
+        browser.close();
 
     }
 
     @Override
     public void quit() {
-
+        browser.quit();
     }
 
     @Override
     public Set<String> getWindowHandles() {
-        return null;
+        return browser.getWindowHandles();
     }
 
     @Override
     public String getWindowHandle() {
-        return getWindowHandle();
+        return browser.getWindowHandle();
     }
 
     @Override
     public TargetLocator switchTo() {
-        return switchTo();
+        return browser.switchTo();
     }
 
     @Override
     public Navigation navigate() {
-        return navigate();
+        return browser.navigate();
     }
 
     @Override
     public Options manage() {
-        return manage();
+        return browser.manage();
     }
 }
