@@ -32,28 +32,32 @@ public class ChildDressPage extends AbstractPage {
                 && driver.findElement(By.id("main-category-choose-label")).getText().contains("Дитячий одяг"));
     }
 
-    public void selectNewState() {
 
-        Assert.assertTrue(driver.findElement(state).isDisplayed());
-        driver.findElement(state).click();
-        driver.manage().timeouts().implicitlyWait(1000, TimeUnit.DAYS.MICROSECONDS);
-        Assert.assertTrue(driver.findElement(checkboxNew).isDisplayed());
-        driver.findElement(checkboxNew).click();
+    public Boolean checkNewState() {
 
-    }
 
-    public Boolean checkResultListFilteredByNewState() {
+        if (driver.findElement(state).isDisplayed()){
+            driver.findElement(state).click();
+        }
+//        driver.manage().timeouts().implicitlyWait(100, TimeUnit.DAYS.MICROSECONDS);
+
+        if (driver.findElement(getCheckboxNewCSS).isDisplayed()){
+            driver.findElement(getCheckboxNewCSS).click();
+        }
+
+        driver.findElement(listElementCSS).click();
 
         List<WebElement> elements = driver.findElements(By.cssSelector("a"));
-        System.out.println(elements.toArray().toString());
+
         Boolean ok = false;
- /*       for (int i = 0; i < elements.size(); i++) {
+        for (int i = 0; i < elements.size(); i++) {
             if (elements.get(i).getText().equalsIgnoreCase("Нові")) {
                 ok = true;}
         }
-        driver.navigate().back();*/
+        //driver.navigate().back();
         return ok;
     }
+
 
 
 }

@@ -23,6 +23,7 @@ public class AbstractTest {
         //https://code.google.com/p/selenium/issues/detail?id=7954
 
         File file = new File("C:\\Users\\ifilipenko\\OneDrive\\tools\\webdriver\\chromedriver.exe");
+       // File file = new File("/Users/inna/Dropbox/GitHub/filipenko-bionic/chromedriver2.exe");
         System.setProperty("webdriver.chrome.driver",file.getAbsolutePath());
         browser = new Browser(new ChromeDriver());
         browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
