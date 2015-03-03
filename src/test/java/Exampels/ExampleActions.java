@@ -1,6 +1,6 @@
 package Exampels;
 
-import olx.tests.AbstractTest;
+import olx.functionaltests.AbstractTest;
 import org.testng.annotations.Test;
 
 /**
@@ -11,7 +11,7 @@ public class ExampleActions extends AbstractTest {
     @Test
     public void exampleActions(){
 
-        browser.get("http://olx.ua/uk/");
+        driver.get("http://olx.ua/uk/");
         //Actions actions = new Actions();
     }
 

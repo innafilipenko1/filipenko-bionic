@@ -1,8 +1,5 @@
-package olx.config;
+package olx._pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import webdriver.Browser;
 
 /**

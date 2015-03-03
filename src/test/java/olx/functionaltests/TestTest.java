@@ -1,4 +1,4 @@
-package olx.tests;
+package olx.functionaltests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

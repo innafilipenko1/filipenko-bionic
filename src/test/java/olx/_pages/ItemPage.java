@@ -1,4 +1,4 @@
-package olx.config;
+package olx._pages;
 
 /**
  * Created by c2611 on 23.02.2015.

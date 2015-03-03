@@ -1,14 +1,11 @@
-package olx.config;
+package olx._pages;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import webdriver.Browser;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by c2611 on 23.02.2015.

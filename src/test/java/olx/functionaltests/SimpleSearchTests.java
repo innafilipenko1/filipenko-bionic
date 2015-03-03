@@ -1,6 +1,6 @@
-package olx.tests;
+package olx.functionaltests;
 
-import olx.config.SimpleSearchPage;
+import olx._pages.SimpleSearchPage;
 import org.testng.annotations.Test;
 
 /**
@@ -14,7 +14,7 @@ public class SimpleSearchTests extends AbstractTest{
     @Test
     public void checkSearchByName() {
 
-        SimpleSearchPage ss =  new SimpleSearchPage(browser);
+        SimpleSearchPage ss =  new SimpleSearchPage(driver);
         ss.openSite();
         ss.doAndCheckSearchByInput("кот");
 

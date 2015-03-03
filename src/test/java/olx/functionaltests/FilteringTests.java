@@ -1,9 +1,9 @@
-package olx.tests;
+package olx.functionaltests;
 
 
-import olx.config.ChildDressPage;
-import olx.config.ChildPage;
-import olx.config.HomePage;
+import olx._pages.ChildDressPage;
+import olx._pages.ChildPage;
+import olx._pages.HomePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -29,23 +29,23 @@ public class FilteringTests extends AbstractTest {
 
 
     public void openChildWorld() {
-        HomePage homePage = new HomePage(browser);
-        browser.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
+        HomePage homePage = new HomePage(driver);
+        driver.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
         homePage.open();
         homePage.openChildWorld();
-        ChildPage childPage = new ChildPage(browser);
+        ChildPage childPage = new ChildPage(driver);
         Assert.assertTrue(childPage.isOpen());
     }
 
     public void openChildDressPage() {
-        ChildPage childPage = new ChildPage(browser);
+        ChildPage childPage = new ChildPage(driver);
         childPage.openChildDressPage();
-        ChildDressPage childDressPage = new ChildDressPage(browser);
+        ChildDressPage childDressPage = new ChildDressPage(driver);
         Assert.assertTrue(childDressPage.isOpen());
     }
 
     public void sortByNew(){
-        ChildDressPage childDressPage = new ChildDressPage(browser);
+        ChildDressPage childDressPage = new ChildDressPage(driver);
         childDressPage.checkNewState();
         //!!!!!!Assert.assertTrue(childDressPage.checkNewState(), "Sorted by New!");
     }

@@ -11,9 +11,10 @@
     </test>
     <test name="OLX" >
         <classes>
-            <class name="olx.tests.FilteringTests"/>
-       <!--   <class name="olx.tests.SimpleSearchTests"/> -->
-        </classes>
+            <!--  <class name="olx.functionaltests.FilteringTests"/>
+               <class name="olx.functionaltestsionaltests.SimpleSearchTests"/> -->
+            <class name="olx.functionaltests.AdvertismentTest"/>
+    </classes>
     </test>
 
 </suite>
