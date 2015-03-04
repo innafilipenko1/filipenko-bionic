@@ -1,26 +1,31 @@
 package olx._pages;
 
-import com.gargoylesoftware.htmlunit.util.StringUtils;
 import entities.Advertisement;
 import org.openqa.selenium.By;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import webdriver.Browser;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by ifilipenko on 3/3/2015.
  */
-public class AdvertisementPage extends AbstractPage{
+public class AdvertisementPage extends AbstractPage {
 
     private static final By createAdvertisementLink = By.id("post-new-ad");
     private static final By advTitlePath = By.id("add-title");
     private static final By advCategoryPath = By.cssSelector("#targetrenderSelect1-0>dt>a");
     private static final By categoryAnimalsPath = By.id("cat-35");
-    private static final By dogPath = By.xpath("//a[@data-category = '64']/span");
+    private static final By dogPath = By.xpath("//a[@data-category = '64']");
     private static final By pricePath = By.className("paramPriceInput");
-    private static final By dogBreedPath = By.id("targetparam137");
+    private static final By dogBreedPath = By.id("parameter-div-dog_breed");
+    private static final By dogBreedListPath = By.id("param137");
     private static final By privatizationTypePath = By.id("targetid_private_business");
     private static final By privatizationDescPath = By.name("data[description]");
     private static final By state = By.xpath(".//*[@id='targetparam13']/dt/a");
@@ -31,45 +36,59 @@ public class AdvertisementPage extends AbstractPage{
         super(driver);
     }
 
-    public void openAdPage(){
+    public void openAdPage() {
         driver.get("http://olx.ua/post-new-ad/");
     }
 
-    public void setAdv(Advertisement adv) throws AWTException, InterruptedException {
+    public void setAdv(Advertisement adv) {
         driver.findElement(advTitlePath).sendKeys(adv.title);
-        selectPhoto();
-        //selectDogCategory();
-
+        selectDogCategory();
+        try {
+            selectPhoto();
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    public void selectDogCategory(){
+    public void selectDogCategory() {
 
         driver.findElement(advCategoryPath).click();
+        driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
         driver.findElement(categoryAnimalsPath).click();
+
+        driver.findElement(By.xpath("//a[@data-category = '35']")).click();
+        driver.findElement(By.xpath("//a[@data-category = '35']")).click();
         driver.findElement(dogPath).click();
 
-        //driver.findElement(pricePath).sendKeys("5000");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-      /*  WebElement dogBreadList = driver.findElement(dogBreedPath);
-        Select dogBreed = new Select(dogBreadList);
-        dogBreed.selectByValue("2000");
+        driver.findElement(dogBreedPath).click();
+        driver.findElement(By.xpath("//*[@id='targetparam137']/dd/ul/li[33]/a")).click();
 
-        WebElement privatizationTypeList = driver.findElement(privatizationTypePath);
-        Select privatizationType = new Select(privatizationTypeList);
-        privatizationType.selectByValue("private");
+        driver.findElement(privatizationTypePath).click();
+        driver.findElement(By.xpath("//dl[@id='targetid_private_business']/dd/ul/li[2]/a")).click();
 
-        driver.findElement(privatizationDescPath).sendKeys("I like labrador retrievers!!!'");*/
+    /*
+        Select dogBreed = new Select(driver.findElement(dogBreedListPath));
+        dogBreed.selectByValue("8496");*/
+
+        driver.findElement(privatizationDescPath).sendKeys("I like labrador retrievers!!!" +
+                "I need to add 50 symbols because of stupid validation on the form.");
 
     }
 
     public void selectPhoto() throws AWTException {
 
+        driver.manage().timeouts().implicitlyWait(5000, TimeUnit.DAYS.SECONDS);
         driver.findElement(By.id("add-file-1")).click();
-        String photoPath = "LoginError.png";
-        StringSelection ss = new StringSelection(photoPath);
+        StringSelection ss = new StringSelection(Advertisement.photoFilePath);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-         //imitate mouse events like ENTER, CTRL+C, CTRL+V
+        //imitate mouse events like ENTER, CTRL+C, CTRL+V
         Robot robot = new Robot();
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
@@ -83,9 +102,7 @@ public class AdvertisementPage extends AbstractPage{
     }
 
 
-
-    public boolean isError()
-    {
+    public boolean isError() {
         return false;
     }
 
@@ -99,25 +116,6 @@ public class AdvertisementPage extends AbstractPage{
     select.selectByVisibleText("Africa");
     System.out.println(select.getFirstSelectedOption().getText());*/
 
-/*    attaching a file
-    WebElement uploadPhoto = driver.findElement(By.id("photo"));
-    uploadPhoto.click();
-    Thread.sleep(2000);
-    //uploadPhoto.sendKeys("C:/Users/ifilipenko/Dropbox/Books/LoginError.png");
-
-    // StringSelection ss = new StringSelection("C:/Users/ifilipenko/Dropbox/Books/LoginError.png");
-    StringSelection ss = new StringSelection("LoginError.png");
-    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-    //        imitate mouse events like ENTER, CTRL+C, CTRL+V
-    Robot robot = new Robot();
-//        robot.keyPress(KeyEvent.VK_ENTER);
-//        robot.keyRelease(KeyEvent.VK_ENTER);
-    robot.keyPress(KeyEvent.VK_CONTROL);
-    robot.keyPress(KeyEvent.VK_V);
-    robot.keyRelease(KeyEvent.VK_V);
-    robot.keyRelease(KeyEvent.VK_CONTROL);
-    robot.keyPress(KeyEvent.VK_ENTER);
-    robot.keyRelease(KeyEvent.VK_ENTER);*/
 
 
 /*    String forName = "qazxswedcbvfrtgbnhyujmkiololpQAZXSWEDCVFRTGBNHYUJMKIOLP_";

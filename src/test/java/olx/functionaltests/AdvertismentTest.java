@@ -19,7 +19,8 @@ public class AdvertismentTest extends AbstractTest {
 
         AdvertisementPage adPage = new AdvertisementPage(driver);
         adPage.openAdPage();
-        adPage.selectPhoto();
+        adPage.setAdv(new Advertisement(true));
+
 
     }
 

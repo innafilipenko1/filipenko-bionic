@@ -10,16 +10,16 @@ import java.io.File;
  */
 public class Advertisement {
 
-    public String title = "title";
-    public String rubric = "";
-    public String desc = "";
-    public String photoFilePath = new File(PropertyLoader.loadProperty("project.path") + "src/test/resources/testData.file").getAbsolutePath();
-    public String region = "";
-    public String user = "";
-    public String email = "";
-    public String phone = "";
-    public String icq = "";
-    public String skype = "";
+    public static  String title = "title";
+    public static  String rubric = "";
+    public static  String desc = "";
+    public static  String photoFilePath = new File(PropertyLoader.loadProperty("project.path") + "/src/test/resources/LoginError.png").getAbsolutePath();
+    public static  String region = "";
+    public static  String user = "";
+    public static  String email = "";
+    public static  String phone = "";
+    public static  String icq = "";
+    public static  String skype = "";
 
     public String setCorrectTitle(){
         return title = RandomStringUtils.randomAlphabetic(6);

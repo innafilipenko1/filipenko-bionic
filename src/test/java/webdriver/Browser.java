@@ -44,7 +44,7 @@ public class Browser implements WebDriver {
 
     @Override
     public WebElement findElement(By by) {
-        WebDriverWait webDriverWait = new WebDriverWait(browser, 10);
+        WebDriverWait webDriverWait = new WebDriverWait(browser, 30);
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(by));
         return browser.findElement(by);
     }
