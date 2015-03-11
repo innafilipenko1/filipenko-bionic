@@ -47,7 +47,7 @@ public class FilteringTests extends AbstractTest {
     public void sortByNew(){
         ChildDressPage childDressPage = new ChildDressPage(driver);
         childDressPage.checkNewState();
-        //!!!!!!Assert.assertTrue(childDressPage.checkNewState(), "Sorted by New!");
+        Assert.assertTrue(childDressPage.checkNewState(), "Sorted by New!");
     }
 
 

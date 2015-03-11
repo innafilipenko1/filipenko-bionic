@@ -1,10 +1,7 @@
 package olx.functionaltests;
 
-import entities.Advertisement;
 import olx._pages.AdvertisementPage;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
-import webdriver.Browser;
 
 import java.awt.*;
 
@@ -19,9 +16,8 @@ public class AdvertismentTest extends AbstractTest {
 
         AdvertisementPage adPage = new AdvertisementPage(driver);
         adPage.openAdPage();
-        adPage.setAdv(new Advertisement(true));
-
-
+        adPage.selectCategory();
+        //adPage.setAdv(new Advertisement(true));
     }
 
 

@@ -9,18 +9,16 @@ import java.io.File;
 /**
  * Created by inna on 3/1/15.
  */
-public class TestTest{
+public class TestTest extends AbstractTest{
 
     WebDriver driver;
 
 
     @Test
-    public void setUp(){
+    public void test(){
 
-        File file = new File("Macintosh HD/Users/inna/Dropbox/GitHub/filipenko-bionic/chromedriver2.exe");
-        System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
-        driver = new ChromeDriver();
-        driver.get("google.com");
+
+
     }
 
 

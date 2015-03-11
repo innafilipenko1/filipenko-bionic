@@ -3,8 +3,6 @@ package olx._pages;
 import entities.Advertisement;
 import org.openqa.selenium.By;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import webdriver.Browser;
 
@@ -19,15 +17,20 @@ import java.util.concurrent.TimeUnit;
 public class AdvertisementPage extends AbstractPage {
 
     private static final By createAdvertisementLink = By.id("post-new-ad");
-    private static final By advTitlePath = By.id("add-title");
-    private static final By advCategoryPath = By.cssSelector("#targetrenderSelect1-0>dt>a");
+    private static final By TitlePath = By.id("add-title");
+    private static final By CategoryPath = By.cssSelector("#targetrenderSelect1-0>dt>a");
+
     private static final By categoryAnimalsPath = By.id("cat-35");
+    private static final By subcategoryAnimalsPath = By.xpath("//a[@data-category = '35']");
     private static final By dogPath = By.xpath("//a[@data-category = '64']");
     private static final By pricePath = By.className("paramPriceInput");
     private static final By dogBreedPath = By.id("parameter-div-dog_breed");
+    private static final By dogBreedValuePath = By.xpath("//*[@id='targetparam137']/dd/ul/li[33]/a");
     private static final By dogBreedListPath = By.id("param137");
     private static final By privatizationTypePath = By.id("targetid_private_business");
     private static final By privatizationDescPath = By.name("data[description]");
+
+
     private static final By state = By.xpath(".//*[@id='targetparam13']/dt/a");
     private static final By chooseState = By.xpath(".//*[@id='targetparam13']/dd/ul/li[3]/a");
     private static final By email = By.id("add-email");
@@ -40,25 +43,35 @@ public class AdvertisementPage extends AbstractPage {
         driver.get("http://olx.ua/post-new-ad/");
     }
 
+
     public void setAdv(Advertisement adv) {
-        driver.findElement(advTitlePath).sendKeys(adv.title);
-        selectDogCategory();
+        driver.findElement(TitlePath).sendKeys(adv.title);
+        selectCategory();
         try {
             selectPhoto();
         } catch (AWTException e) {
             e.printStackTrace();
         }
+        selectLocation();
+        driver.findElement(By.cssSelector("#add-person")).sendKeys("Your majesty");
+        driver.findElement(By.cssSelector("#add-email")).sendKeys("test@gmail.com");
+        driver.findElement(By.cssSelector("#accept > div > div.area.clr.margintop5 > div")).click();
+        driver.findElement(By.id("preview-link")).click();
+        Assert.assertTrue(driver.getCurrentUrl().contains("preview"));
 
     }
 
-    public void selectDogCategory() {
+    public void selectCategory() {
 
-        driver.findElement(advCategoryPath).click();
+        driver.findElement(CategoryPath).click();
+
         driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
+
         driver.findElement(categoryAnimalsPath).click();
 
-        driver.findElement(By.xpath("//a[@data-category = '35']")).click();
-        driver.findElement(By.xpath("//a[@data-category = '35']")).click();
+        driver.findElement(subcategoryAnimalsPath).click();
+        driver.findElement(subcategoryAnimalsPath).click();
+
         driver.findElement(dogPath).click();
 
         try {
@@ -67,9 +80,14 @@ public class AdvertisementPage extends AbstractPage {
             e.printStackTrace();
         }
 
-        driver.findElement(dogBreedPath).click();
-        driver.findElement(By.xpath("//*[@id='targetparam137']/dd/ul/li[33]/a")).click();
+        driver.findElement(pricePath).sendKeys("5000");
 
+        //select from the list Dog Breed
+        driver.findElement(dogBreedPath).click();
+        driver.findElement(dogBreedValuePath).click();
+        Assert.assertTrue(driver.findElement(dogBreedListPath).isSelected());
+
+        //select from the list Privatization Type
         driver.findElement(privatizationTypePath).click();
         driver.findElement(By.xpath("//dl[@id='targetid_private_business']/dd/ul/li[2]/a")).click();
 
@@ -99,6 +117,21 @@ public class AdvertisementPage extends AbstractPage {
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void selectLocation() {
+        driver.findElement(By.xpath("//dl[@id='targetregion-id-select']/dt/a")).click();
+        driver.findElement(By.xpath("//*[@id='targetregion-id-select']/dd/ul/li[10]/a")).click();
+
+        driver.findElement(By.xpath("//dl[@id='targetsubregion-id-select']/dt/a")).click();
+        driver.findElement(By.xpath("//*[@id='targetsubregion-id-select']/dd/ul/li[20]/a")).click();
     }
 
 

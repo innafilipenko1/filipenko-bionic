@@ -1,20 +1,19 @@
-
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="firstTestSuite" verbose="1" >
+<suite name="firstTestSuite" verbose="1">
     <parameter name="expectedCount" value="2"/>
 
     <test name="SmokeTest" enabled="false">
         <classes>
-        <class name="class5.WikiTest" />
-    </classes>
+            <class name="class5.WikiTest"/>
+        </classes>
     </test>
-    <test name="OLX" >
+    <test name="OLX">
         <classes>
-            <!--  <class name="olx.functionaltests.FilteringTests"/>
-               <class name="olx.functionaltestsionaltests.SimpleSearchTests"/> -->
-            <class name="olx.functionaltests.AdvertismentTest"/>
-    </classes>
-    </test>
+            <!-- <class name="olx.functionaltests.FilteringTests"/>
+             <class name="olx.functionaltests.SimpleSearchTests"/> -->
+             <class name="olx.functionaltests.AdvertismentTest"/>
+         </classes>
+     </test>
 
-</suite>
+ </suite>

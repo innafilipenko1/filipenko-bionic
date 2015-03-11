@@ -27,7 +27,7 @@ public class AbstractTest {
 
     }
 
-    @AfterSuite
+    @AfterSuite(enabled = false)
     public void shutEvt(){
        if(driver != null) driver.quit();
     }
