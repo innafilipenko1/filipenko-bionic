@@ -14,79 +14,79 @@ import java.util.Set;
  */
 public class Browser implements WebDriver {
 
-   public WebDriver browser;
+   public WebDriver driver;
 
     public Browser(WebDriver driver){
-        this.browser = driver;
+        this.driver = driver;
     }
 
     @Override
     public void get(String s) {
-        browser.get(s);
+        driver.get(s);
     }
 
     @Override
     public String getCurrentUrl() {
-        return browser.getCurrentUrl();
+        return driver.getCurrentUrl();
     }
 
     @Override
     public String getTitle() {
-        return browser.getTitle();
+        return driver.getTitle();
     }
 
     @Override
     public List<WebElement> findElements(By by) {
-        WebDriverWait webDriverWait = new WebDriverWait(browser, 10);
+        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(by));
-        return browser.findElements(by);
+        return driver.findElements(by);
     }
 
     @Override
     public WebElement findElement(By by) {
-        WebDriverWait webDriverWait = new WebDriverWait(browser, 30);
+        WebDriverWait webDriverWait = new WebDriverWait(driver, 30);
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(by));
-        return browser.findElement(by);
+        return driver.findElement(by);
     }
 
     @Override
     public String getPageSource() {
-        return browser.getPageSource();
+        return driver.getPageSource();
     }
 
     @Override
     public void close() {
-        browser.close();
+        driver.close();
 
     }
 
     @Override
     public void quit() {
-        browser.quit();
+        driver.quit();
     }
 
     @Override
     public Set<String> getWindowHandles() {
-        return browser.getWindowHandles();
+        return driver.getWindowHandles();
     }
 
     @Override
     public String getWindowHandle() {
-        return browser.getWindowHandle();
+        return driver.getWindowHandle();
     }
 
     @Override
     public TargetLocator switchTo() {
-        return browser.switchTo();
+        return driver.switchTo();
     }
 
     @Override
     public Navigation navigate() {
-        return browser.navigate();
+        return driver.navigate();
     }
 
     @Override
     public Options manage() {
-        return browser.manage();
+        return driver.manage();
     }
 }

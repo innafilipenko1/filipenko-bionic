@@ -3,6 +3,7 @@ package olx._pages;
 import entities.Advertisement;
 import org.openqa.selenium.By;
 
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import webdriver.Browser;
@@ -29,27 +30,31 @@ public class AdvertisementPage extends AbstractPage {
     private static final By dogBreedValuePath = By.xpath("//*[@id='targetparam137']/dd/ul/li[33]/a");
     private static final By dogBreedListPath = By.id("param137");
 
-    private static final By privatizationTypedListPath = By.id("id_private_business");
+    private static final By privatizationTypeListPath = By.id("id_private_business");
     private static final By privatizationTypePath = By.id("targetid_private_business");
-    private static final By privatizationTypeValuePath = By.id("//dl[@id='targetid_private_business']/dd/ul/li[2]/a");
+    private static final By privatizationTypeValuePath = By.xpath("//dl[@id='targetid_private_business']/dd/ul/li[2]/a");
     private static final By privatizationDescPath = By.name("data[description]");
 
+    private static final By uploadImagePath = By.id("add-file-1");
 
-    private static final By state = By.xpath(".//*[@id='targetparam13']/dt/a");
-    private static final By chooseState = By.xpath(".//*[@id='targetparam13']/dd/ul/li[3]/a");
-    private static final By email = By.id("add-email");
+    private static final By regionListPath = By.xpath("//dl[@id='targetregion-id-select']/dt/a");
+    private static final By regionValuePath = By.xpath("//*[@id='targetregion-id-select']/dd/ul/li[10]/a");
+    private static final By stateListPath = By.xpath("//dl[@id='targetsubregion-id-select']/dt/a");
+    private static final By stateValuePath = By.xpath("//*[@id='targetsubregion-id-select']/dd/ul/li[20]/a");
+
+    private static final By contactPath = By.cssSelector("#add-person");
+    private static final By emailPath = By.cssSelector("#add-email");
 
     public AdvertisementPage(Browser driver) {
         super(driver);
     }
 
     public void openAdPage() {
-        driver.get("http://olx.ua/post-new-ad/");
+        browser.get("http://olx.ua/post-new-ad/");
     }
 
-
     public void setAdv(Advertisement adv) {
-        driver.findElement(TitlePath).sendKeys(adv.title);
+        browser.findElement(TitlePath).sendKeys(adv.title);
         selectCategory();
         try {
             selectPhoto();
@@ -57,26 +62,26 @@ public class AdvertisementPage extends AbstractPage {
             e.printStackTrace();
         }
         selectLocation();
-        driver.findElement(By.cssSelector("#add-person")).sendKeys("Your majesty");
-        driver.findElement(By.cssSelector("#add-email")).sendKeys("test@gmail.com");
-        driver.findElement(By.cssSelector("#accept > div > div.area.clr.margintop5 > div")).click();
-        driver.findElement(By.id("preview-link")).click();
-        Assert.assertTrue(driver.getCurrentUrl().contains("preview"));
+        browser.findElement(contactPath).sendKeys("Your majesty");
+        browser.findElement(emailPath).sendKeys("test@gmail.com");
+        browser.findElement(By.cssSelector("#accept > div > div.area.clr.margintop5 > div")).click();
+        browser.findElement(By.id("preview-link")).click();
+        Assert.assertTrue(browser.getCurrentUrl().contains("preview"));
 
     }
 
     public void selectCategory() {
 
-        driver.findElement(CategoryPath).click();
+        browser.findElement(CategoryPath).click();
 
-        driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
+        browser.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
 
-        driver.findElement(categoryAnimalsPath).click();
+        browser.findElement(categoryAnimalsPath).click();
 
-        driver.findElement(subcategoryAnimalsPath).click();
-        driver.findElement(subcategoryAnimalsPath).click();
+        Actions builder = new Actions(browser.driver);
+        builder.doubleClick(browser.findElement(subcategoryAnimalsPath));
 
-        driver.findElement(dogPath).click();
+        browser.findElement(dogPath).click();
 
         try {
             Thread.sleep(2000);
@@ -84,33 +89,33 @@ public class AdvertisementPage extends AbstractPage {
             e.printStackTrace();
         }
 
-        driver.findElement(pricePath).sendKeys("5000");
+        browser.findElement(pricePath).sendKeys("5000");
 
         //select from the list Dog Breed
-        Select dogBreedList = new Select(driver.findElement(dogBreedListPath));
-        driver.findElement(dogBreedPath).click();
-        driver.findElement(dogBreedValuePath).click();
+        Select dogBreedList = new Select(browser.findElement(dogBreedListPath));
+        browser.findElement(dogBreedPath).click();
+        browser.findElement(dogBreedValuePath).click();
         Assert.assertEquals("2000", dogBreedList.getFirstSelectedOption().getAttribute("value"));
 
         //select from the list Privatization Type
-        Select privatizationTypeList = new Select(driver.findElement(privatizationTypedListPath));
-        driver.findElement(privatizationTypePath).click();
-        driver.findElement(privatizationTypeValuePath).click();
+        Select privatizationTypeList = new Select(browser.findElement(privatizationTypeListPath));
+        browser.findElement(privatizationTypePath).click();
+        browser.findElement(privatizationTypeValuePath).click();
         Assert.assertEquals("private",privatizationTypeList.getFirstSelectedOption().getAttribute("value"));
 
     /*
-        Select dogBreed = new Select(driver.findElement(dogBreedListPath));
+        Select dogBreed = new Select(browser.findElement(dogBreedListPath));
         dogBreed.selectByValue("8496");*/
 
-        driver.findElement(privatizationDescPath).sendKeys("I like labrador retrievers!!!" +
+        browser.findElement(privatizationDescPath).sendKeys("I like labrador retrievers!!!" +
                 "I need to add 50 symbols because of stupid validation on the form.");
 
     }
 
     public void selectPhoto() throws AWTException {
 
-        driver.manage().timeouts().implicitlyWait(5000, TimeUnit.DAYS.SECONDS);
-        driver.findElement(By.id("add-file-1")).click();
+        browser.manage().timeouts().implicitlyWait(5000, TimeUnit.DAYS.SECONDS);
+        browser.findElement(uploadImagePath).click();
         StringSelection ss = new StringSelection(Advertisement.photoFilePath);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
         //imitate mouse events like ENTER, CTRL+C, CTRL+V
@@ -132,29 +137,16 @@ public class AdvertisementPage extends AbstractPage {
 
     }
 
-
     public void selectLocation() {
-        driver.findElement(By.xpath("//dl[@id='targetregion-id-select']/dt/a")).click();
-        driver.findElement(By.xpath("//*[@id='targetregion-id-select']/dd/ul/li[10]/a")).click();
-
-        driver.findElement(By.xpath("//dl[@id='targetsubregion-id-select']/dt/a")).click();
-        driver.findElement(By.xpath("//*[@id='targetsubregion-id-select']/dd/ul/li[20]/a")).click();
+        browser.findElement(regionListPath).click();
+        browser.findElement(regionValuePath).click();
+        browser.findElement(stateListPath).click();
+        browser.findElement(stateValuePath).click();
     }
-
 
     public boolean isError() {
         return false;
     }
-
-
-
-
-
-
- /*   WebElement selectList = driver.findElement(By.id("continents"));
-    Select select = new Select(selectList);
-    select.selectByVisibleText("Africa");
-    System.out.println(select.getFirstSelectedOption().getText());*/
 
 
 

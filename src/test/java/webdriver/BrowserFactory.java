@@ -53,8 +53,8 @@ public class BrowserFactory {
         } else
         if (browser.equals(CHROME))
         {
-            //system.property (env variable) = "webdriver.chrome.driver"
-            System.setProperty("webdriver.chrome.driver","C:\\Users\\ifilipenko\\Dropbox\\GitHub\\tools\\webdriverwin\\chromedriver.exe");
+            //system.property (env variable) = "webdriver.chrome.browser"
+            System.setProperty("webdriver.chrome.browser","D:\\tools\\chromedriver.exe");
             driver = new ChromeDriver(capabilities);
         } else
         if (browser.equals(HTML_UNIT))
@@ -91,7 +91,7 @@ public class BrowserFactory {
         if (browser.contains(HTML_UNIT)){
             capabilities = DesiredCapabilities.htmlUnit();
         }else
-            Assert.fail("No configuration available for driver");
+            Assert.fail("No configuration available for browser");
 
         return capabilities;
     }

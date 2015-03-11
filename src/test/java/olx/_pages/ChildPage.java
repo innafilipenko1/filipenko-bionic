@@ -19,10 +19,10 @@ public class ChildPage extends AbstractPage {
 
     public void openChildDressPage(){
 
-        driver.findElement(openChildWorldLink).click();
+        browser.findElement(openChildWorldLink).click();
     }
 
     public boolean isOpen(){
-       return driver.findElement(openChildWorldLink).isDisplayed();
+       return browser.findElement(openChildWorldLink).isDisplayed();
     }
 }

@@ -28,21 +28,21 @@ public class SimpleSearchPage extends AbstractPage{
 
     public void openSite(){
 
-        driver.get(pageURL);
+        browser.get(pageURL);
 
     }
 
    public void doAndCheckSearchByInput(String string){
 
-       driver.findElement(searchLookup).sendKeys(string);
-       driver.findElement(searchButton).click();
+       browser.findElement(searchLookup).sendKeys(string);
+       browser.findElement(searchButton).click();
        checkResultTable(string);
 
    }
 
     public void checkResultTable(String string){
 
-        List<WebElement> offersTable = driver.findElement(resultTable).findElements(tableElementLinkText);
+        List<WebElement> offersTable = browser.findElement(resultTable).findElements(tableElementLinkText);
 
         for(WebElement trElement : offersTable){
 

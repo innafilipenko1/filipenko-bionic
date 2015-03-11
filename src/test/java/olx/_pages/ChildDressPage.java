@@ -25,33 +25,33 @@ public class ChildDressPage extends AbstractPage {
     }
 
     public boolean isOpen() {
-        return (driver.getCurrentUrl().contains("detskaya-odezhda/")
-                && driver.findElement(By.id("main-category-choose-label")).getText().contains("Дитячий одяг"));
+        return (browser.getCurrentUrl().contains("detskaya-odezhda/")
+                && browser.findElement(By.id("main-category-choose-label")).getText().contains("Дитячий одяг"));
     }
 
 
     public Boolean checkNewState() {
 
 
-        if (driver.findElement(state).isDisplayed()){
-            driver.findElement(state).click();
+        if (browser.findElement(state).isDisplayed()){
+            browser.findElement(state).click();
         }
-//        driver.manage().timeouts().implicitlyWait(100, TimeUnit.DAYS.MICROSECONDS);
+//        browser.manage().timeouts().implicitlyWait(100, TimeUnit.DAYS.MICROSECONDS);
 
-        if (driver.findElement(getCheckboxNewCSS).isDisplayed()){
-            driver.findElement(getCheckboxNewCSS).click();
+        if (browser.findElement(getCheckboxNewCSS).isDisplayed()){
+            browser.findElement(getCheckboxNewCSS).click();
         }
 
-        driver.findElement(listElementCSS).click();
+        browser.findElement(listElementCSS).click();
 
-        List<WebElement> elements = driver.findElements(By.cssSelector("a"));
+        List<WebElement> elements = browser.findElements(By.cssSelector("a"));
 
         Boolean ok = false;
         for (int i = 0; i < elements.size(); i++) {
             if (elements.get(i).getText().equalsIgnoreCase("Нові")) {
                 ok = true;}
         }
-        //driver.navigate().back();
+        //browser.navigate().back();
         return ok;
     }
 

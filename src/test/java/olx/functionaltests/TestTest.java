@@ -1,8 +1,11 @@
 package olx.functionaltests;
 
+import olx._pages.AdvertisementPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
+import webdriver.Browser;
 
 import java.io.File;
 
@@ -11,11 +14,16 @@ import java.io.File;
  */
 public class TestTest extends AbstractTest{
 
-    WebDriver driver;
-
+    Browser driver;
 
     @Test
     public void test(){
+        AdvertisementPage adPage = new AdvertisementPage(driver);
+        adPage.openAdPage();
+
+       Actions builder = new Actions(driver);
+
+
 
 
 

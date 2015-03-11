@@ -24,6 +24,7 @@ public class AbstractTest {
     public void init(){
 
         driver = BrowserFactory.create(PropertyLoader.loadProperty("browser"));
+        driver.manage().window().maximize();
 
     }
 

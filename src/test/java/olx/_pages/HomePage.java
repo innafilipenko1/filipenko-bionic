@@ -13,11 +13,11 @@ public class HomePage extends AbstractPage {
     }
 
     public void open(){
-        driver.get("http://olx.ua/uk/");
+        browser.get("http://olx.ua/uk/");
     }
 
     public void openChildWorld(){
-        driver.findElement(By.cssSelector("a[data-code='detskiy-mir']")).click();
+        browser.findElement(By.cssSelector("a[data-code='detskiy-mir']")).click();
     }
 
 

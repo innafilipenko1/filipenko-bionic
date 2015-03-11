@@ -7,14 +7,14 @@ import webdriver.Browser;
  */
 public class AbstractPage {
 
-    public Browser driver;
+    public Browser browser;
 
     public AbstractPage(Browser driver){
-        this.driver = driver;
+        this.browser = driver;
     }
 
     public void openSite(String string){
-        driver.get(string);
+        browser.get(string);
     }
     
 
