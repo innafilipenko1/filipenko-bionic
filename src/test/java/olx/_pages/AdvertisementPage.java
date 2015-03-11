@@ -3,6 +3,7 @@ package olx._pages;
 import entities.Advertisement;
 import org.openqa.selenium.By;
 
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import webdriver.Browser;
 
@@ -27,7 +28,10 @@ public class AdvertisementPage extends AbstractPage {
     private static final By dogBreedPath = By.id("parameter-div-dog_breed");
     private static final By dogBreedValuePath = By.xpath("//*[@id='targetparam137']/dd/ul/li[33]/a");
     private static final By dogBreedListPath = By.id("param137");
+
+    private static final By privatizationTypedListPath = By.id("id_private_business");
     private static final By privatizationTypePath = By.id("targetid_private_business");
+    private static final By privatizationTypeValuePath = By.id("//dl[@id='targetid_private_business']/dd/ul/li[2]/a");
     private static final By privatizationDescPath = By.name("data[description]");
 
 
@@ -83,13 +87,16 @@ public class AdvertisementPage extends AbstractPage {
         driver.findElement(pricePath).sendKeys("5000");
 
         //select from the list Dog Breed
+        Select dogBreedList = new Select(driver.findElement(dogBreedListPath));
         driver.findElement(dogBreedPath).click();
         driver.findElement(dogBreedValuePath).click();
-        Assert.assertTrue(driver.findElement(dogBreedListPath).isSelected());
+        Assert.assertEquals("2000", dogBreedList.getFirstSelectedOption().getAttribute("value"));
 
         //select from the list Privatization Type
+        Select privatizationTypeList = new Select(driver.findElement(privatizationTypedListPath));
         driver.findElement(privatizationTypePath).click();
-        driver.findElement(By.xpath("//dl[@id='targetid_private_business']/dd/ul/li[2]/a")).click();
+        driver.findElement(privatizationTypeValuePath).click();
+        Assert.assertEquals("private",privatizationTypeList.getFirstSelectedOption().getAttribute("value"));
 
     /*
         Select dogBreed = new Select(driver.findElement(dogBreedListPath));
