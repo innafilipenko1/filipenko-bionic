@@ -7,7 +7,7 @@ import webdriver.Browser;
  */
 public class AbstractPage {
 
-    public Browser browser;
+    protected Browser browser;
 
     public AbstractPage(Browser driver){
         this.browser = driver;

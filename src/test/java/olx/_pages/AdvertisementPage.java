@@ -3,7 +3,6 @@ package olx._pages;
 import entities.Advertisement;
 import org.openqa.selenium.By;
 
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import webdriver.Browser;
@@ -18,12 +17,13 @@ import java.util.concurrent.TimeUnit;
  */
 public class AdvertisementPage extends AbstractPage {
 
-    private static final By createAdvertisementLink = By.id("post-new-ad");
+    private static final String pageURL = "http://olx.ua/post-new-ad/";
+
     private static final By TitlePath = By.id("add-title");
     private static final By CategoryPath = By.cssSelector("#targetrenderSelect1-0>dt>a");
 
-    private static final By categoryAnimalsPath = By.id("cat-35");
-    private static final By subcategoryAnimalsPath = By.xpath("//a[@data-category = '35']");
+    private static final By categoryPath = By.id("cat-"+Advertisement.categoryId);
+    private static final By subcategoryPath = By.xpath("//a[@data-category = '"+Advertisement.subcategoryId+"']");
     private static final By dogPath = By.xpath("//a[@data-category = '64']");
     private static final By pricePath = By.className("paramPriceInput");
     private static final By dogBreedPath = By.id("parameter-div-dog_breed");
@@ -45,13 +45,18 @@ public class AdvertisementPage extends AbstractPage {
     private static final By contactPath = By.cssSelector("#add-person");
     private static final By emailPath = By.cssSelector("#add-email");
 
+    private static final By agreeCheckBox = By.cssSelector("#accept > div > div.area.clr.margintop5 > div");
+    private static final By previewLink = By.id("preview-link");
+
+
     public AdvertisementPage(Browser driver) {
         super(driver);
     }
 
     public void openAdPage() {
-        browser.get("http://olx.ua/post-new-ad/");
+        browser.get(pageURL);
     }
+
 
     public void setAdv(Advertisement adv) {
         browser.findElement(TitlePath).sendKeys(adv.title);
@@ -64,24 +69,25 @@ public class AdvertisementPage extends AbstractPage {
         selectLocation();
         browser.findElement(contactPath).sendKeys("Your majesty");
         browser.findElement(emailPath).sendKeys("test@gmail.com");
-        browser.findElement(By.cssSelector("#accept > div > div.area.clr.margintop5 > div")).click();
-        browser.findElement(By.id("preview-link")).click();
-        Assert.assertTrue(browser.getCurrentUrl().contains("preview"));
-
+        browser.findElement(agreeCheckBox).click();
+        browser.findElement(previewLink).click();
     }
 
     public void selectCategory() {
-
         browser.findElement(CategoryPath).click();
 
         browser.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
 
-        browser.findElement(categoryAnimalsPath).click();
+        browser.findElement(categoryPath).click();
 
-        Actions builder = new Actions(browser.driver);
-        builder.doubleClick(browser.findElement(subcategoryAnimalsPath));
+/*        Actions builder = new Actions(browser.driver);
+        builder.doubleClick(browser.findElement(subcategoryPath));*/
+
+        browser.findElement(subcategoryPath).click();
+        browser.findElement(subcategoryPath).click();
 
         browser.findElement(dogPath).click();
+/*        browser.findElement(dogPath).click();*/
 
         try {
             Thread.sleep(2000);
@@ -101,7 +107,7 @@ public class AdvertisementPage extends AbstractPage {
         Select privatizationTypeList = new Select(browser.findElement(privatizationTypeListPath));
         browser.findElement(privatizationTypePath).click();
         browser.findElement(privatizationTypeValuePath).click();
-        Assert.assertEquals("private",privatizationTypeList.getFirstSelectedOption().getAttribute("value"));
+        Assert.assertEquals("private", privatizationTypeList.getFirstSelectedOption().getAttribute("value"));
 
     /*
         Select dogBreed = new Select(browser.findElement(dogBreedListPath));
@@ -113,7 +119,6 @@ public class AdvertisementPage extends AbstractPage {
     }
 
     public void selectPhoto() throws AWTException {
-
         browser.manage().timeouts().implicitlyWait(5000, TimeUnit.DAYS.SECONDS);
         browser.findElement(uploadImagePath).click();
         StringSelection ss = new StringSelection(Advertisement.photoFilePath);
@@ -130,7 +135,7 @@ public class AdvertisementPage extends AbstractPage {
         robot.keyRelease(KeyEvent.VK_ENTER);
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -144,18 +149,14 @@ public class AdvertisementPage extends AbstractPage {
         browser.findElement(stateValuePath).click();
     }
 
+
+    public boolean isPreviewPageOpen() {
+        return browser.getCurrentUrl().contains("preview");
+
+    }
+
     public boolean isError() {
         return false;
     }
 
-
-
-/*    String forName = "qazxswedcbvfrtgbnhyujmkiololpQAZXSWEDCVFRTGBNHYUJMKIOLP_";
-    Random random = new Random();
-    String userName = "";
-    for (int i = 0; i < 10 ; i++) {
-        int n = random.nextInt(forName.length());
-        userName = userName + forName.charAt(n);
-    }
-    System.out.println(userName);*/
 }

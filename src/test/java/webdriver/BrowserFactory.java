@@ -54,7 +54,7 @@ public class BrowserFactory {
         if (browser.equals(CHROME))
         {
             //system.property (env variable) = "webdriver.chrome.browser"
-            System.setProperty("webdriver.chrome.browser","D:\\tools\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver","C:\\Users\\ifilipenko\\Dropbox\\GitHub\\tools\\webdriverwin\\chromedriver.exe");
             driver = new ChromeDriver(capabilities);
         } else
         if (browser.equals(HTML_UNIT))

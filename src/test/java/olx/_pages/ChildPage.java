@@ -18,7 +18,6 @@ public class ChildPage extends AbstractPage {
     }
 
     public void openChildDressPage(){
-
         browser.findElement(openChildWorldLink).click();
     }
 

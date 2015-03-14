@@ -13,14 +13,14 @@ import org.testng.annotations.Test;
 public class AdvertisementTest extends AbstractTest {
 
     @DataProvider
-    public Object[][] negativeAdvs() {
+    public Object[][] negativeAd() {
         return new Object[][] {
                 new Object[] {"title", "email" , "smth"},
                 new Object[] {"another", "newOne" , "correctOne"},
         };
     }
 
-    @Test(dataProvider = "negativeAdvs")
+    @Test(dataProvider = "negativeAd")
     public void createAdv(String title, String email, String smth)
     {
         driver.get("http://olx.ua/uk/post-new-ad/");
