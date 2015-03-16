@@ -3,6 +3,8 @@ package olx.negativetests;
 import entities.Advertisement;
 import olx.functionaltests.AbstractTest;
 import olx._pages.AdvertisementPage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -11,6 +13,8 @@ import org.testng.annotations.Test;
  * Created by ifilipenko on 3/3/2015.
  */
 public class AdvertisementTest extends AbstractTest {
+
+    Logger logger = LoggerFactory.getLogger(AdvertisementTest.class);
 
     @DataProvider
     public Object[][] negativeAd() {
@@ -31,6 +35,7 @@ public class AdvertisementTest extends AbstractTest {
             , String contact
             , String email
     ) {
+        logger.info("createAdv Started");
         Advertisement newAd = new Advertisement();
         newAd.title = title;
         newAd.privatizationDesc = privatizationDesc;
@@ -41,5 +46,6 @@ public class AdvertisementTest extends AbstractTest {
         adPage.setAdv(newAd);
 
         Assert.assertTrue(adPage.isError());
+        logger.info("createAdv Finished");
     }
 }

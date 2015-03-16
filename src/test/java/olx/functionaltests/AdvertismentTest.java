@@ -41,10 +41,14 @@ public class AdvertismentTest extends AbstractTest {
 
     @Test
     public void createAdvertisement() throws AWTException {
+        logger.info("createAdvertisement using Advertisment entity correct=true values Started");
         AdvertisementPage adPage = new AdvertisementPage(driver);
+        logger.info("createAdvertisement - open New Advertisment page");
         adPage.openAdPage();
+        logger.info("createAdvertisement - filling out Advertisment fields");
         adPage.setAdv(new Advertisement(true));
         Assert.assertTrue(adPage.isPreviewPageOpen());
+        logger.info("createAdvertisement Finished");
     }
 
     @Test(dataProvider = "positiveAd")
@@ -63,6 +67,7 @@ public class AdvertismentTest extends AbstractTest {
             , int price
     )
             throws AWTException {
+        logger.info("createAdvertisementTest using DataProvider Started");
         Advertisement newAd = new Advertisement();
         newAd.title = title;
         newAd.categoryId = categoryId;
@@ -77,10 +82,13 @@ public class AdvertismentTest extends AbstractTest {
         newAd.contact = contact;
         newAd.price = price;
         AdvertisementPage adPage = new AdvertisementPage(driver);
+        logger.info("Open Add New Advertisment page");
         adPage.openAdPage();
+        logger.info("Filling out Advertisment fields");
         adPage.setAdv(newAd);
 
         Assert.assertTrue(adPage.isPreviewPageOpen());
+        logger.info("createAdvertisementTest Finished");
     }
 
 }
