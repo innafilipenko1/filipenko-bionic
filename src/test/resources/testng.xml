@@ -10,10 +10,11 @@
     </test>
     <test name="OLX">
         <classes>
-            <!-- <class name="olx.functionaltests.FilteringTests"/>
-             <class name="olx.functionaltests.SimpleSearchTests"/> -->
-             <class name="olx.functionaltests.AdvertismentTest"/>
-         </classes>
-     </test>
+           <!-- <class name="olx.functionaltests.SimpleSearchTests"/>
+            <class name="olx.functionaltests.FilteringTests"/>
+            <class name="olx.functionaltests.AdvertismentTest"/>-->
+            <class name="olx.negativetests.AdvertisementTest"/>
+        </classes>
+    </test>
 
- </suite>
+</suite>

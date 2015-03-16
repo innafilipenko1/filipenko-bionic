@@ -24,28 +24,28 @@ public class AdvertisementPage extends AbstractPage {
 
     private static final By categoryPath = By.id("cat-"+Advertisement.categoryId);
     private static final By subcategoryPath = By.xpath("//a[@data-category = '"+Advertisement.subcategoryId+"']");
-    private static final By dogPath = By.xpath("//a[@data-category = '64']");
+    private static final By categoryTypePath = By.xpath("//a[@data-category = '"+Advertisement.categoryTypeId+"']");
     private static final By pricePath = By.className("paramPriceInput");
-    private static final By dogBreedPath = By.id("parameter-div-dog_breed");
-    private static final By dogBreedValuePath = By.xpath("//*[@id='targetparam137']/dd/ul/li[33]/a");
+    private static final By dogBreedPath = By.id("targetparam137");
+    private static final By dogBreedValuePath = By.xpath("//*[@id='targetparam137']/dd/ul/li["+Advertisement.dogBreedValueId+"]/a");
     private static final By dogBreedListPath = By.id("param137");
 
     private static final By privatizationTypeListPath = By.id("id_private_business");
     private static final By privatizationTypePath = By.id("targetid_private_business");
-    private static final By privatizationTypeValuePath = By.xpath("//dl[@id='targetid_private_business']/dd/ul/li[2]/a");
+    private static final By privatizationTypeValuePath = By.xpath("//dl[@id='targetid_private_business']/dd/ul/li["+Advertisement.privatizationValueId+"]/a");
     private static final By privatizationDescPath = By.name("data[description]");
 
     private static final By uploadImagePath = By.id("add-file-1");
 
     private static final By regionListPath = By.xpath("//dl[@id='targetregion-id-select']/dt/a");
-    private static final By regionValuePath = By.xpath("//*[@id='targetregion-id-select']/dd/ul/li[10]/a");
+    private static final By regionValuePath = By.xpath("//*[@id='targetregion-id-select']/dd/ul/li["+Advertisement.regionValueId+"]/a");
     private static final By stateListPath = By.xpath("//dl[@id='targetsubregion-id-select']/dt/a");
-    private static final By stateValuePath = By.xpath("//*[@id='targetsubregion-id-select']/dd/ul/li[20]/a");
+    private static final By stateValuePath = By.xpath("//*[@id='targetsubregion-id-select']/dd/ul/li["+Advertisement.stateValueId+"]/a");
 
     private static final By contactPath = By.cssSelector("#add-person");
     private static final By emailPath = By.cssSelector("#add-email");
 
-    private static final By agreeCheckBox = By.cssSelector("#accept > div > div.area.clr.margintop5 > div");
+    public static final By agreeCheckBox = By.cssSelector("#accept > div > div.area.clr.margintop5 > div");
     private static final By previewLink = By.id("preview-link");
 
 
@@ -67,8 +67,8 @@ public class AdvertisementPage extends AbstractPage {
             e.printStackTrace();
         }
         selectLocation();
-        browser.findElement(contactPath).sendKeys("Your majesty");
-        browser.findElement(emailPath).sendKeys("test@gmail.com");
+        browser.findElement(contactPath).sendKeys(Advertisement.contact);
+        browser.findElement(emailPath).sendKeys(Advertisement.email);
         browser.findElement(agreeCheckBox).click();
         browser.findElement(previewLink).click();
     }
@@ -86,8 +86,8 @@ public class AdvertisementPage extends AbstractPage {
         browser.findElement(subcategoryPath).click();
         browser.findElement(subcategoryPath).click();
 
-        browser.findElement(dogPath).click();
-/*        browser.findElement(dogPath).click();*/
+        browser.findElement(categoryTypePath).click();
+/*        browser.findElement(categoryTypePath).click();*/
 
         try {
             Thread.sleep(2000);
@@ -95,26 +95,25 @@ public class AdvertisementPage extends AbstractPage {
             e.printStackTrace();
         }
 
-        browser.findElement(pricePath).sendKeys("5000");
+        browser.findElement(pricePath).sendKeys(""+Advertisement.setPrice());
 
         //select from the list Dog Breed
-        Select dogBreedList = new Select(browser.findElement(dogBreedListPath));
         browser.findElement(dogBreedPath).click();
         browser.findElement(dogBreedValuePath).click();
-        Assert.assertEquals("2000", dogBreedList.getFirstSelectedOption().getAttribute("value"));
+        Select dogBreedList = new Select(browser.findElement(dogBreedListPath));
+        Assert.assertEquals(Advertisement.dogBreedValue, dogBreedList.getFirstSelectedOption().getAttribute("value"));
 
         //select from the list Privatization Type
-        Select privatizationTypeList = new Select(browser.findElement(privatizationTypeListPath));
         browser.findElement(privatizationTypePath).click();
         browser.findElement(privatizationTypeValuePath).click();
-        Assert.assertEquals("private", privatizationTypeList.getFirstSelectedOption().getAttribute("value"));
+        Select privatizationTypeList = new Select(browser.findElement(privatizationTypeListPath));
+        Assert.assertEquals(Advertisement.privatizationValue, privatizationTypeList.getFirstSelectedOption().getAttribute("value"));
 
     /*
         Select dogBreed = new Select(browser.findElement(dogBreedListPath));
         dogBreed.selectByValue("8496");*/
 
-        browser.findElement(privatizationDescPath).sendKeys("I like labrador retrievers!!!" +
-                "I need to add 50 symbols because of stupid validation on the form.");
+        browser.findElement(privatizationDescPath).sendKeys(Advertisement.privatizationDesc);
 
     }
 
@@ -156,7 +155,14 @@ public class AdvertisementPage extends AbstractPage {
     }
 
     public boolean isError() {
-        return false;
+       return (browser.findElement(By.xpath("//p/label[@for='add-title']")).isDisplayed() &&
+        browser.findElement(By.xpath("//p/label[@for='add-description']")).isDisplayed() &&
+        browser.findElement(By.xpath("//p/label[@for='add-person']")).isDisplayed() &&
+        browser.findElement(By.xpath("//p/label[@for='add-email']")).isDisplayed() &&
+        browser.findElement(By.xpath("//p/label[@for='data[accept]']")).isDisplayed());
+
+
+
     }
 
 }

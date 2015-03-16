@@ -1,6 +1,6 @@
 package webdriver;
 
-import olx.utils.PropertyLoader;
+import utils.PropertyLoader;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -54,7 +54,7 @@ public class BrowserFactory {
         if (browser.equals(CHROME))
         {
             //system.property (env variable) = "webdriver.chrome.browser"
-            System.setProperty("webdriver.chrome.driver","C:\\Users\\ifilipenko\\Dropbox\\GitHub\\tools\\webdriverwin\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver","/Users/inna/Dropbox/GitHub/tools/webdrivermac/chromedriver");
             driver = new ChromeDriver(capabilities);
         } else
         if (browser.equals(HTML_UNIT))

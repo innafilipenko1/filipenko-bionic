@@ -17,7 +17,7 @@ public class SimpleSearchPage extends AbstractPage{
         super (driver);
     }
 
-    private String pageURL = "http://olx.ua/";
+    private String pageURL = "http://olx.ua/uk/";
 
     private By searchLookup = By.id("headerSearch");
     private By searchButton = By.id("submit-searchmain");

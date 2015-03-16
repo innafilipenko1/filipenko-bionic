@@ -1,4 +1,4 @@
-package olx.utils;
+package utils;
 
 import org.testng.Assert;
 

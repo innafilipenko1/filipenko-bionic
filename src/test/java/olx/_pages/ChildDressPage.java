@@ -6,18 +6,19 @@ import org.openqa.selenium.WebElement;
 import webdriver.Browser;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by c2611 on 23.02.2015.
  */
 public class ChildDressPage extends AbstractPage {
 
-    private By state = By.xpath("//span[@class='header block']");
+    private By state = By.xpath("//div[@class='filter-item rel']/a");
     private By stateCSS = By.cssSelector("span:class='header block'");
     private By checkboxNew = By.xpath("//ul[contains(@class, 'abs select binded')]/li[3]/label[@data-value='new']");
     private By getCheckboxNewCSS = By.cssSelector("#f-new_state");
     private By firstElementesultList = By.xpath("//ul[contains(@class, 'abs select binded')]/li[3]/label[@data-value='new']");
-    private By listElementCSS = By.cssSelector(".marginright5.link.linkWithHash.detailsLink>span");
+    private By listElementCSS = By.cssSelector(".marginright5.link.linkWithHash.detailsLink");
 
 
     public ChildDressPage(Browser driver) {
@@ -32,16 +33,22 @@ public class ChildDressPage extends AbstractPage {
 
     public Boolean checkNewState() {
 
-
-        if (browser.findElement(state).isDisplayed()){
-            browser.findElement(state).click();
-        }
-//        browser.manage().timeouts().implicitlyWait(100, TimeUnit.DAYS.MICROSECONDS);
-
-        if (browser.findElement(getCheckboxNewCSS).isDisplayed()){
-            browser.findElement(getCheckboxNewCSS).click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
+        browser.findElement(state).click();
+
+        browser.manage().timeouts().implicitlyWait(100, TimeUnit.DAYS.MICROSECONDS);
+
+        browser.findElement(getCheckboxNewCSS).click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         browser.findElement(listElementCSS).click();
 
         List<WebElement> elements = browser.findElements(By.cssSelector("a"));
@@ -49,12 +56,12 @@ public class ChildDressPage extends AbstractPage {
         Boolean ok = false;
         for (int i = 0; i < elements.size(); i++) {
             if (elements.get(i).getText().equalsIgnoreCase("Нові")) {
-                ok = true;}
+                ok = true;
+            }
         }
-        //browser.navigate().back();
+        browser.navigate().back();
         return ok;
     }
-
 
 
 }

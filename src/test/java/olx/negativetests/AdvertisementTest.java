@@ -14,22 +14,32 @@ public class AdvertisementTest extends AbstractTest {
 
     @DataProvider
     public Object[][] negativeAd() {
-        return new Object[][] {
-                new Object[] {"title", "email" , "smth"},
-                new Object[] {"another", "newOne" , "correctOne"},
+        return new Object[][]{
+                new Object[]{
+                        "123"
+                        , "Test"
+                        , "In"
+                        , "test"
+                },
         };
     }
 
     @Test(dataProvider = "negativeAd")
-    public void createAdv(String title, String email, String smth)
-    {
-        driver.get("http://olx.ua/uk/post-new-ad/");
-        Advertisement adv = new Advertisement(false);
-        adv.title = title;
-        adv.email = email;
-        adv.icq = smth;
-        AdvertisementPage advPage = new AdvertisementPage(driver);
-       // advPage.setAdv(adv);
-        Assert.assertTrue(advPage.isError());
+    public void createAdv(
+            String title
+            , String privatizationDesc
+            , String contact
+            , String email
+    ) {
+        Advertisement newAd = new Advertisement();
+        newAd.title = title;
+        newAd.privatizationDesc = privatizationDesc;
+        newAd.contact = contact;
+        newAd.email = email;
+        AdvertisementPage adPage = new AdvertisementPage(driver);
+        adPage.openAdPage();
+        adPage.setAdv(newAd);
+
+        Assert.assertTrue(adPage.isError());
     }
 }
