@@ -1,5 +1,7 @@
 package olx.functionaltests;
 
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import utils.PropertyLoader;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -13,9 +15,9 @@ import webdriver.BrowserFactory;
 
 public class AbstractTest {
 
-     protected Browser driver;
+     public Browser driver;
 
-    @BeforeSuite
+    @BeforeClass
     public void init(){
 
         driver = BrowserFactory.create(PropertyLoader.loadProperty("browser"));
@@ -23,7 +25,7 @@ public class AbstractTest {
 
     }
 
-    @AfterSuite
+    @AfterClass
     public void shutEvt(){
        if(driver != null) driver.quit();
     }

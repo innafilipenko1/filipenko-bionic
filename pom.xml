@@ -21,6 +21,12 @@
                 <browser.name>chrome</browser.name>
             </properties>
         </profile>
+        <profile>
+            <id>firefox_remote</id>
+            <properties>
+                <browser.name>firefox_r</browser.name>
+            </properties>
+        </profile>
     </profiles>
 
     <properties>

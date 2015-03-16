@@ -1,5 +1,6 @@
 package webdriver;
 
+import org.openqa.selenium.remote.RemoteWebDriver;
 import utils.PropertyLoader;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Platform;
@@ -10,6 +11,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -31,10 +34,16 @@ public class BrowserFactory {
     public static final String CHROME = "chrome";
     public static final String FIREFOX = "firefox";
     public static final String HTML_UNIT = "htmlunit";
+    public static final String FIREFOX_REMOTE = "firefox_r";
+
 
     /* Platform constants */
     public static final String WINDOWS = "windows";
     public static final String MAC = "mac";
+
+    //public static final String hubUrl = "http://localhost:9999/wd/hub";
+    public static final String hubUrl = "http://192.168.10.49:9999/wd/hub";
+
 
     public static Browser create(String browser)
     {
@@ -54,13 +63,23 @@ public class BrowserFactory {
         if (browser.equals(CHROME))
         {
             //system.property (env variable) = "webdriver.chrome.browser"
-            System.setProperty("webdriver.chrome.driver","C:\\Users\\ifilipenko\\Dropbox\\GitHub\\tools\\webdriverwin\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver","D:\\Tools\\chromedriver.exe");
             driver = new ChromeDriver(capabilities);
         } else
         if (browser.equals(HTML_UNIT))
         {
             driver = new HtmlUnitDriver(capabilities);
         } else
+        if (browser.equals(FIREFOX_REMOTE))
+        {
+            try {
+                driver = new RemoteWebDriver(new URL(hubUrl), DesiredCapabilities.firefox());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+
+        } else
+
             Assert.fail("Browser configuration error");
 
         //additional configuration
