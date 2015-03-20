@@ -7,6 +7,7 @@ import olx._pages.HomePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -15,40 +16,36 @@ import java.util.concurrent.TimeUnit;
 public class FilteringTests extends AbstractTest {
 
     @Test
-    public void visualFilterTest() {
-        openChildWorld();
-        openChildDressPage();
-    }
-
-    @Test
     public void filterForNewStateTest() {
-        openChildWorld();
+        openChildrenWorld();
         openChildDressPage();
         sortByNew();
     }
 
-
-    public void openChildWorld() {
+    public void openChildrenWorld() {
         HomePage homePage = new HomePage(driver);
-        driver.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
+        logger.info("Open OLX Home page");
         homePage.open();
+        Assert.assertTrue(homePage.isOpen(), "Home page is open");
+        logger.info("Open Child World page");
         homePage.openChildWorld();
         ChildPage childPage = new ChildPage(driver);
-        Assert.assertTrue(childPage.isOpen());
+        Assert.assertTrue(childPage.isOpen(), "Child Page is open");
     }
 
     public void openChildDressPage() {
         ChildPage childPage = new ChildPage(driver);
+        logger.info("Open Child Dress page");
         childPage.openChildDressPage();
+        Assert.assertTrue(childPage.isOpen(), "Child page is open");
         ChildDressPage childDressPage = new ChildDressPage(driver);
-        Assert.assertTrue(childDressPage.isOpen());
+        Assert.assertTrue(childDressPage.isOpen(), "Child Dress page is open");
     }
 
-    public void sortByNew(){
+    public void sortByNew() {
         ChildDressPage childDressPage = new ChildDressPage(driver);
         Assert.assertTrue(childDressPage.checkNewState(), "Sorted by New!");
     }
-
 
 
 }

@@ -42,8 +42,8 @@ public class AdvertisementTest extends AbstractTest {
         newAd.contact = contact;
         newAd.email = email;
         AdvertisementPage adPage = new AdvertisementPage(driver);
-        adPage.openAdPage();
-        adPage.setAdv(newAd);
+        adPage.open();
+        adPage.setAdvertisement(newAd);
 
         Assert.assertTrue(adPage.isError());
         logger.info("createAdv Finished");

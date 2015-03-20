@@ -2,7 +2,6 @@ package olx._pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import webdriver.Browser;
 
 import java.util.List;
@@ -10,47 +9,37 @@ import java.util.List;
 /**
  * Created by inna on 2/22/15.
  */
-public class SimpleSearchPage extends AbstractPage{
+public class SimpleSearchPage extends AbstractPage {
+
+    private static final By SEARCH_LOOKUP = By.id("headerSearch");
+    private static final By SEARCH_BUTTON = By.id("submit-searchmain");
+    private static final By RESULT_TABLE = By.id("offers_table");
+    private static final By TABLE_ELEMENT_LINK = By.xpath("//table[@id='offers_table']/tbody/tr//h3/a/span");
 
 
-    public SimpleSearchPage(Browser driver){
-        super (driver);
+    public SimpleSearchPage(Browser driver) {
+        super(driver);
     }
 
-    private String pageURL = "http://olx.ua/uk/";
-
-    private By searchLookup = By.id("headerSearch");
-    private By searchButton = By.id("submit-searchmain");
-    public static final By resultTable = By.id("offers_table");
-    public static final By resultTabelElement = By.className("marginright5 link linkWithHash detailsLink");
-    private By tableElementLinkText = By.xpath("//table[@id='offers_table']/tbody/tr//h3/a/span");
-
-
-    public void openSite(){
-
-        browser.get(pageURL);
-
+    public boolean isOpen() {
+        return browser.getCurrentUrl().contains("list");
     }
 
-   public void doAndCheckSearchByInput(String string){
+    public void applySearch(String string) {
+        browser.findElement(SEARCH_LOOKUP).sendKeys(string);
+        browser.findElement(SEARCH_BUTTON).click();
+    }
 
-       browser.findElement(searchLookup).sendKeys(string);
-       browser.findElement(searchButton).click();
-       checkResultTable(string);
+    public boolean getResultTable(String string) {
+        List<WebElement> offersTable = browser.findElement(RESULT_TABLE).findElements(TABLE_ELEMENT_LINK);
 
-   }
-
-    public void checkResultTable(String string){
-
-        List<WebElement> offersTable = browser.findElement(resultTable).findElements(tableElementLinkText);
-
-        for(WebElement trElement : offersTable){
-
-            Assert.assertTrue(org.apache.commons.lang3.StringUtils.containsIgnoreCase(trElement.getText(), string));
-
+        Boolean ok = false;
+        for (WebElement trElement : offersTable) {
+             if (trElement.getText().contains(string))
+                 ok = true;
         }
+        return ok;
     }
-
 
 
 }

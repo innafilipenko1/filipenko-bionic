@@ -8,20 +8,26 @@ import webdriver.Browser;
  */
 public class HomePage extends AbstractPage {
 
-    public HomePage(Browser driver){
+    private static final String HOME_ULR = "http://olx.ua/uk/";
+    private static final By HOME_TEXT = By.xpath(".//*[@id='body-container']/div/div/div[2]/div/p[1]");
+    private static final By CHILD_WORLD_PATH = By.cssSelector("a[data-code='detskiy-mir']");
+
+
+    public HomePage(Browser driver) {
         super(driver);
     }
 
-    public void open(){
-        browser.get("http://olx.ua/uk/");
+    public void open() {
+        browser.get(HOME_ULR);
     }
 
-    public void openChildWorld(){
-        browser.findElement(By.cssSelector("a[data-code='detskiy-mir']")).click();
+    public boolean isOpen() {
+        return browser.findElement(HOME_TEXT).isDisplayed();
     }
 
-
-
+    public void openChildWorld() {
+        browser.findElement(CHILD_WORLD_PATH).click();
+    }
 
 
 }

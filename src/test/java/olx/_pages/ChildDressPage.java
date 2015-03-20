@@ -13,12 +13,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class ChildDressPage extends AbstractPage {
 
-    private By state = By.xpath("//div[@class='filter-item rel']/a");
-    private By stateCSS = By.cssSelector("span:class='header block'");
-    private By checkboxNew = By.xpath("//ul[contains(@class, 'abs select binded')]/li[3]/label[@data-value='new']");
-    private By getCheckboxNewCSS = By.cssSelector("#f-new_state");
-    private By firstElementesultList = By.xpath("//ul[contains(@class, 'abs select binded')]/li[3]/label[@data-value='new']");
-    private By listElementCSS = By.cssSelector(".marginright5.link.linkWithHash.detailsLink");
+    private static final By STATE_PATH = By.xpath("//div[@class='filter-item rel']/a");
+    private static final By NEW_CHECKBOX_PATH = By.cssSelector("#f-new_state");
+    private static final By LIST_ELEMENT_PATH = By.cssSelector(".marginright5.link.linkWithHash.detailsLink");
 
 
     public ChildDressPage(Browser driver) {
@@ -30,7 +27,6 @@ public class ChildDressPage extends AbstractPage {
                 && browser.findElement(By.id("main-category-choose-label")).getText().contains("Дитячий одяг"));
     }
 
-
     public Boolean checkNewState() {
 
         try {
@@ -39,18 +35,15 @@ public class ChildDressPage extends AbstractPage {
             e.printStackTrace();
         }
 
-        browser.findElement(state).click();
-
+        browser.findElement(STATE_PATH).click();
         browser.manage().timeouts().implicitlyWait(100, TimeUnit.DAYS.MICROSECONDS);
-
-        browser.findElement(getCheckboxNewCSS).click();
+        browser.findElement(NEW_CHECKBOX_PATH).click();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        browser.findElement(listElementCSS).click();
-
+        browser.findElement(LIST_ELEMENT_PATH).click();
         List<WebElement> elements = browser.findElements(By.cssSelector("a"));
 
         Boolean ok = false;
@@ -59,7 +52,6 @@ public class ChildDressPage extends AbstractPage {
                 ok = true;
             }
         }
-        browser.navigate().back();
         return ok;
     }
 

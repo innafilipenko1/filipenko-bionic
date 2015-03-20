@@ -9,14 +9,13 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.awt.*;
+import java.lang.reflect.Method;
 
 
 /**
  * Created by ifilipenko on 3/3/2015.
  */
-public class AdvertismentTest extends AbstractTest {
-
-    Logger logger = LoggerFactory.getLogger(AdvertismentTest.class);
+public class AdvertisementTest extends AbstractTest {
 
     @DataProvider
     public Object[][] positiveAd() {
@@ -41,12 +40,12 @@ public class AdvertismentTest extends AbstractTest {
 
     @Test
     public void createAdvertisement() throws AWTException {
-        logger.info("createAdvertisement using Advertisment entity correct=true values Started");
+        logger.info("using Advertisement entity correct=true values Started");
         AdvertisementPage adPage = new AdvertisementPage(driver);
-        logger.info("createAdvertisement - open New Advertisment page");
-        adPage.openAdPage();
-        logger.info("createAdvertisement - filling out Advertisment fields");
-        adPage.setAdv(new Advertisement(true));
+        logger.info("open New Advertisement page");
+        adPage.open();
+        logger.info("createAdvertisement - filling out Advertisement fields");
+        adPage.setAdvertisement(new Advertisement(true));
         Assert.assertTrue(adPage.isPreviewPageOpen());
         logger.info("createAdvertisement Finished");
     }
@@ -83,9 +82,9 @@ public class AdvertismentTest extends AbstractTest {
         newAd.price = price;
         AdvertisementPage adPage = new AdvertisementPage(driver);
         logger.info("Open Add New Advertisment page");
-        adPage.openAdPage();
+        adPage.open();
         logger.info("Filling out Advertisment fields");
-        adPage.setAdv(newAd);
+        adPage.setAdvertisement(newAd);
 
         Assert.assertTrue(adPage.isPreviewPageOpen());
         logger.info("createAdvertisementTest Finished");

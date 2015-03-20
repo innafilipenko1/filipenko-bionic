@@ -1,33 +1,40 @@
 package olx.functionaltests;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 import utils.PropertyLoader;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
 import webdriver.Browser;
 import webdriver.BrowserFactory;
+
+import java.lang.reflect.Method;
 
 /**
  * Created by c2611 on 23.02.2015.
  */
 
-
 public class AbstractTest {
+    protected Browser driver;
+    protected Logger logger;
 
-     public Browser driver;
 
-    @BeforeClass
-    public void init(){
-
+    @BeforeMethod
+    public void init() {
         driver = BrowserFactory.create(PropertyLoader.loadProperty("browser"));
+        logger = LoggerFactory.getLogger(getClass());
+        logger.info("Test Started");
+        //logger.info(method.getDeclaringClass().getCanonicalName() + "." + method.getName() + " Started");
         driver.manage().window().maximize();
-
     }
 
-    @AfterClass
-    public void shutEvt(){
-       if(driver != null) driver.quit();
+    @AfterMethod
+    public void shutEvt(Method method, ITestResult result) {
+        if (result.isSuccess()) {
+            logger.info(method.getDeclaringClass().getCanonicalName() + "." + method.getName() + " Completed");
+        }
+        if (driver != null)
+            driver.quit();
     }
 
 

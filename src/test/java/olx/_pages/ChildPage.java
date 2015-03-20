@@ -9,19 +9,19 @@ import webdriver.Browser;
  */
 public class ChildPage extends AbstractPage {
 
-    private static final By openChildWorldLink = By.id("cat-539");
-
-
+    private static final By CHILD_WORLD_LINK = By.id("cat-539");
 
     public ChildPage(Browser driver){
         super(driver);
     }
 
-    public void openChildDressPage(){
-        browser.findElement(openChildWorldLink).click();
+    public boolean isOpen(){
+        return browser.findElement(CHILD_WORLD_LINK).isDisplayed();
     }
 
-    public boolean isOpen(){
-       return browser.findElement(openChildWorldLink).isDisplayed();
+    public void openChildDressPage(){
+        browser.findElement(CHILD_WORLD_LINK).click();
     }
+
+
 }
