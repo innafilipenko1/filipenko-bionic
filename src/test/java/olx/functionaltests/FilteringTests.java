@@ -7,9 +7,6 @@ import olx._pages.HomePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Method;
-import java.util.concurrent.TimeUnit;
-
 /**
  * Created by c2611 on 23.02.2015.
  */
@@ -26,25 +23,26 @@ public class FilteringTests extends AbstractTest {
         HomePage homePage = new HomePage(driver);
         logger.info("Open OLX Home page");
         homePage.open();
-        Assert.assertTrue(homePage.isOpen(), "Home page is open");
+        Assert.assertTrue(homePage.isOpen(), "Home page is not open");
         logger.info("Open Child World page");
         homePage.openChildWorld();
         ChildPage childPage = new ChildPage(driver);
-        Assert.assertTrue(childPage.isOpen(), "Child Page is open");
+        Assert.assertTrue(childPage.isOpen(), "Child Page is not open");
     }
 
     public void openChildDressPage() {
         ChildPage childPage = new ChildPage(driver);
         logger.info("Open Child Dress page");
         childPage.openChildDressPage();
-        Assert.assertTrue(childPage.isOpen(), "Child page is open");
         ChildDressPage childDressPage = new ChildDressPage(driver);
-        Assert.assertTrue(childDressPage.isOpen(), "Child Dress page is open");
+        Assert.assertTrue(childDressPage.isOpen(), "Child Dress page is not open");
     }
 
     public void sortByNew() {
         ChildDressPage childDressPage = new ChildDressPage(driver);
-        Assert.assertTrue(childDressPage.checkNewState(), "Sorted by New!");
+        logger.info("Filter result list by New state");
+        childDressPage.filterOutByNewState();
+        Assert.assertTrue(childDressPage.checkElementHasNewState(), "Not sorted by New!");
     }
 
 

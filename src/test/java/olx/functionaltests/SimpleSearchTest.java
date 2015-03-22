@@ -22,6 +22,6 @@ public class SimpleSearchTest extends AbstractTest {
         SimpleSearchPage ss = new SimpleSearchPage(driver);
         logger.info("Start searching");
         ss.applySearch(Search.INPUT);
-        Assert.assertTrue(ss.getResultTable(Search.INPUT), "Result table is filtered by" +Search.INPUT );
+        Assert.assertTrue(ss.getResultTable(Search.INPUT));
     }
 }

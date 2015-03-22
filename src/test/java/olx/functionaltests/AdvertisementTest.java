@@ -40,14 +40,13 @@ public class AdvertisementTest extends AbstractTest {
 
     @Test
     public void createAdvertisement() throws AWTException {
-        logger.info("using Advertisement entity correct=true values Started");
         AdvertisementPage adPage = new AdvertisementPage(driver);
-        logger.info("open New Advertisement page");
+        logger.info("Open New Advertisement page");
         adPage.open();
-        logger.info("createAdvertisement - filling out Advertisement fields");
+        logger.info("Fill out Advertisement fields");
+        logger.info("Use Advertisement entity correct=true values");
         adPage.setAdvertisement(new Advertisement(true));
         Assert.assertTrue(adPage.isPreviewPageOpen());
-        logger.info("createAdvertisement Finished");
     }
 
     @Test(dataProvider = "positiveAd")
@@ -66,7 +65,6 @@ public class AdvertisementTest extends AbstractTest {
             , int price
     )
             throws AWTException {
-        logger.info("createAdvertisementTest using DataProvider Started");
         Advertisement newAd = new Advertisement();
         newAd.title = title;
         newAd.categoryId = categoryId;
@@ -81,13 +79,12 @@ public class AdvertisementTest extends AbstractTest {
         newAd.contact = contact;
         newAd.price = price;
         AdvertisementPage adPage = new AdvertisementPage(driver);
-        logger.info("Open Add New Advertisment page");
+        logger.info("Open Add New Advertisement page");
         adPage.open();
-        logger.info("Filling out Advertisment fields");
+        logger.info("Fill out Advertisement fields");
+        logger.info("Use DataProvider values");
         adPage.setAdvertisement(newAd);
-
         Assert.assertTrue(adPage.isPreviewPageOpen());
-        logger.info("createAdvertisementTest Finished");
     }
 
 }

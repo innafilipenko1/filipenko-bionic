@@ -16,7 +16,7 @@ public class ChildPage extends AbstractPage {
     }
 
     public boolean isOpen(){
-        return browser.findElement(CHILD_WORLD_LINK).isDisplayed();
+        return browser.getCurrentUrl().contains("maincategories/");
     }
 
     public void openChildDressPage(){

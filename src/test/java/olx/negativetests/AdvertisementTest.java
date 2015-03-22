@@ -35,17 +35,18 @@ public class AdvertisementTest extends AbstractTest {
             , String contact
             , String email
     ) {
-        logger.info("createAdv Started");
         Advertisement newAd = new Advertisement();
         newAd.title = title;
         newAd.privatizationDesc = privatizationDesc;
         newAd.contact = contact;
         newAd.email = email;
         AdvertisementPage adPage = new AdvertisementPage(driver);
+        logger.info("Open Add New Advertisement page");
         adPage.open();
+        logger.info("Fill out Advertisement fields");
+        logger.info("Use DataProvider values");
         adPage.setAdvertisement(newAd);
-
+        logger.info("Check Error Hints presence on the form");
         Assert.assertTrue(adPage.isError());
-        logger.info("createAdv Finished");
     }
 }

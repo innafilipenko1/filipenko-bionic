@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import webdriver.Browser;
+import webdriver.BrowserFactory;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
@@ -41,6 +42,7 @@ public class AdvertisementPage extends AbstractPage {
     private static final By EMAIL_PATH = By.cssSelector("#add-email");
     public static final By AGREE_CHECKBOX_PATH = By.cssSelector("#accept > div > div.area.clr.margintop5 > div");
     private static final By PREVIEW_LINK_PATH = By.id("preview-link");
+    private static final By IMAGE_UPLOAD_PATH = By.xpath("//*[@id='gallery']/div[3]/input");
 
 
     public static final By TITLE_ERROR = By.xpath("//p/label[@for='add-title']");
@@ -64,11 +66,7 @@ public class AdvertisementPage extends AbstractPage {
     public void setAdvertisement(Advertisement ad) {
         setTitle(ad.title);
         selectCategory();
-        try {
-            selectPhoto(Advertisement.photoFilePath);
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
+        //browser.findElement(IMAGE_UPLOAD_PATH).sendKeys(Advertisement.photoFilePath);
         selectLocation();
         setContact(ad.contact);
         setEmail(ad.email);
@@ -77,11 +75,13 @@ public class AdvertisementPage extends AbstractPage {
     }
 
     public void setTitle(String title) {
+        logger.info("Set Title");
         browser.findElement(TITLE_PATH).sendKeys(title);
     }
 
 
     public void selectCategory() {
+        logger.info("Set Category");
         browser.findElement(CATEGORY_PATH).click();
         browser.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
         browser.findElement(CATEGORY_POPUP_PATH).click();
@@ -91,7 +91,7 @@ public class AdvertisementPage extends AbstractPage {
         browser.findElement(SUBCATEGORY_PATH).click();
         browser.findElement(CATEGORY_PATH_TYPE).click();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -103,10 +103,12 @@ public class AdvertisementPage extends AbstractPage {
     }
 
     public void setPrice() {
+        logger.info("Set Price");
         browser.findElement(PRICE_PATH).sendKeys("" + Advertisement.price);
     }
 
     public void setDogBreed() {
+        logger.info("Select Dog Breed");
         browser.findElement(DOG_BREED_PATH).click();
         browser.findElement(DOG_BREED_VALUE_PATH).click();
         Select dogBreedList = new Select(browser.findElement(DOG_BREED_LIST_PATH));
@@ -114,17 +116,20 @@ public class AdvertisementPage extends AbstractPage {
     }
 
     public void setPrivatizationType() {
+        logger.info("Select Privatization Type");
         browser.findElement(PRIVATIZATION_TYPE_PATH).click();
         browser.findElement(PRIVATIZATION_TYPE_VALUE_PATH).click();
         Select privatizationTypeList = new Select(browser.findElement(PRIVATIZATION_TYPE_LIST_PATH));
-        Assert.assertEquals(Advertisement.privatizationValue, privatizationTypeList.getFirstSelectedOption().getAttribute("value"));
+        //Assert.assertEquals(Advertisement.privatizationValue, privatizationTypeList.getFirstSelectedOption().getAttribute("value"));
     }
 
     public void setPrivatizationDescription() {
+        logger.info("Set Privatization Description");
         browser.findElement(PRIVATIZATION_DESC_PATH).sendKeys(Advertisement.privatizationDesc);
     }
 
     public void selectPhoto(String url) throws AWTException {
+        logger.info("Upload Image");
         browser.manage().timeouts().implicitlyWait(5000, TimeUnit.DAYS.SECONDS);
         browser.findElement(UPLOAD_IMAGE_PATH).click();
         setClipboardData(url);
@@ -157,6 +162,7 @@ public class AdvertisementPage extends AbstractPage {
     }
 
     public void selectLocation() {
+        logger.info("Select Location");
         browser.findElement(REGION_LIST_PATH).click();
         browser.findElement(REGION_VALUE_PATH).click();
         browser.findElement(STATE_LIST_PATH).click();
@@ -164,34 +170,35 @@ public class AdvertisementPage extends AbstractPage {
     }
 
     public void setContact(String contact) {
+        logger.info("Set Contact");
         browser.findElement(CONTACT_PATH).sendKeys(contact);
     }
 
     public void setEmail(String email) {
+        logger.info("Set Email");
         browser.findElement(EMAIL_PATH).sendKeys(email);
     }
 
     public void setAgreeCheckbox() {
+        logger.info("Set Agree CheckBox");
         browser.findElement(AGREE_CHECKBOX_PATH).click();
     }
 
     public void setPreviewLink() {
+        logger.info("Click Preview Link");
         browser.findElement(PREVIEW_LINK_PATH).click();
     }
 
     public boolean isPreviewPageOpen() {
         return browser.getCurrentUrl().contains("preview");
-
     }
 
     public boolean isError() {
+        logger.info("Check Error Hints are visible");
         return (browser.findElement(TITLE_ERROR).isDisplayed() &&
                 browser.findElement(DESCRIPTION_ERROR).isDisplayed() &&
                 browser.findElement(CONTACT_ERROR).isDisplayed() &&
-                browser.findElement(EMAIL_ERROR).isDisplayed() &&
-                browser.findElement(AGREEMENT_ERROR).isDisplayed());
-
-
+                browser.findElement(EMAIL_ERROR).isDisplayed());
     }
 
 }

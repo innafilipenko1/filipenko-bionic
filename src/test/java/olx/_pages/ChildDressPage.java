@@ -27,10 +27,10 @@ public class ChildDressPage extends AbstractPage {
                 && browser.findElement(By.id("main-category-choose-label")).getText().contains("Дитячий одяг"));
     }
 
-    public Boolean checkNewState() {
+    public void filterOutByNewState() {
 
         try {
-            Thread.sleep(5000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -39,11 +39,15 @@ public class ChildDressPage extends AbstractPage {
         browser.manage().timeouts().implicitlyWait(100, TimeUnit.DAYS.MICROSECONDS);
         browser.findElement(NEW_CHECKBOX_PATH).click();
         try {
-            Thread.sleep(5000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         browser.findElement(LIST_ELEMENT_PATH).click();
+
+    }
+
+    public boolean checkElementHasNewState(){
         List<WebElement> elements = browser.findElements(By.cssSelector("a"));
 
         Boolean ok = false;
