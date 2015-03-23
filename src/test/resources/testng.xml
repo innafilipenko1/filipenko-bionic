@@ -10,10 +10,10 @@
     </test>
     <test name="OLX">
         <classes>
-             <class name="olx.functionaltests.SimpleSearchTest"/>
-             <class name="olx.functionaltests.FilteringTests"/>
-              <class name="olx.functionaltests.AdvertisementTest"/>
-              <class name="olx.negativetests.AdvertisementTest"/>
+            <class name="olx.functionaltests.SimpleSearchTest"/>
+            <class name="olx.functionaltests.FilteringTests"/>
+            <class name="olx.functionaltests.AdvertisementTest"/>
+            <class name="olx.negativetests.AdvertisementTest"/>
         </classes>
     </test>
 

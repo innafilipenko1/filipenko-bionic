@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
  */
 
 public class AbstractTest {
-    protected Browser driver;
+    public Browser driver;
     protected Logger logger;
 
 
